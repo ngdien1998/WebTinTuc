@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<!-- Trending Now -->
+<div class="container">
+    <div class="trending-now">
+        <partial name="~/Views/Shared/_TrendingPartial.cshtml" />
+    </div>
+</div>
+
+<!-- Featured Posts Grid -->
+<section class="featured-posts-grid">
+    <div class="container">
+        <div class="row row-8">
+            <partial name="~/Views/Home/_FeaturePostsPartial.cshtml" />
+        </div>
+    </div>
+</section>
+<!-- end featured posts grid -->
+
+<!-- Main container -->
+<div class="main-container container pt-24" id="main-container">
+    <!-- Content -->
+    <div class="row">
+        <!-- Posts -->
+        <div class="col-lg-8 blog__content">
+            <!-- Latest News -->
+            <section class="section tab-post mb-16">
+                <partial name="~/Views/Home/_LastestNewsPartial.cshtml" />
+            </section>
+            <!-- end latest news -->
+        </div>
+        <!-- end posts -->
+
+        <!-- Sidebar -->
+        <aside class="col-lg-4 sidebar sidebar--right">
+            <!-- Widget Popular Posts -->
+            <aside class="widget widget-popular-posts">
+                <partial name="~/Views/Home/_PopularPostsPartial.cshtml" />
+            </aside>
+            <!-- end widget popular posts -->
+
+            <!-- Widget Newsletter -->
+            <aside class="widget widget_mc4wp_form_widget">
+                <h4 class="widget-title">Newsletter</h4>
+                <p class="newsletter__text">
+                    <i class="ui-email newsletter__icon"></i>
+                    Subscribe for our daily news
+                </p>
+                <form class="mc4wp-form" method="post">
+                    <div class="mc4wp-form-fields">
+                        <div class="form-group">
+                            <input name="EMAIL" placeholder="Your email" required=""
+                                   type="email">
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-lg btn-color" type="submit" value="Sign Up">
+                        </div>
+                    </div>
+                </form>
+            </aside>
+            <!-- end widget newsletter -->
+
+            <!-- Widget Socials -->
+            <aside class="widget widget-socials">
+                <h4 class="widget-title">Let's hang out on social</h4>
+                <div class="socials socials--wide socials--large">
+                    <div class="row row-16">
+                        <div class="col">
+                            <a aria-label="facebook" class="social social-facebook" href="#"
+                               target="_blank" title="facebook">
+                                <i class="ui-facebook"></i>
+                                <span class="social__text">Facebook</span>
+                            </a>
+
+                            <a aria-label="twitter" class="social social-twitter" href="#" target="_blank"
+                               title="twitter">
+                                <i class="ui-twitter"></i>
+                                <span class="social__text">Twitter</span>
+                            </a>
+
+                            <a aria-label="youtube" class="social social-youtube" href="#" target="_blank"
+                               title="youtube">
+                                <i class="ui-youtube"></i>
+                                <span class="social__text">Youtube</span>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a aria-label="google" class="social social-google-plus" href="#"
+                               target="_blank" title="google">
+                                <i class="ui-google"></i>
+                                <span class="social__text">Google+</span>
+                            </a>
+
+                            <a aria-label="instagram" class="social social-instagram" href="#"
+                               target="_blank" title="instagram">
+                                <i class="ui-instagram"></i>
+                                <span class="social__text">Instagram</span>
+                            </a>
+
+                            <a aria-label="rss" class="social social-rss" href="#" target="_blank"
+                               title="rss">
+                                <i class="ui-rss"></i>
+                                <span class="social__text">Rss</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <!-- end widget socials -->
+        </aside>
+        <!-- end sidebar -->
+    </div>
+    <!-- end content -->
+
+    <!-- Carousel posts -->
+    <section class="section mb-0">
+        <div class="title-wrap title-wrap--line title-wrap--pr">
+            <h3 class="section-title">editors picks</h3>
+        </div>
+
+        <!-- Slider -->
+        <div class="owl-carousel owl-theme owl-carousel--arrows-outside" id="owl-posts">
+            <partial name="~/Views/Home/_HotNewsPartial.cshtml" />
+        </div>
+        <!-- end slider -->
+    </section>
+    <!-- end carousel posts -->
+
+    <!-- Posts from categories -->
+    <section class="section mb-0">
+        <div class="row">
+            @for (int i = 0; i < 4; i++)
+            {
+                <partial name="~/Views/Home/_PostsFromCategoryPartial.cshtml" />
+            }
+        </div>
+    </section>
+    <!-- end posts from categories -->
+
+    <!-- Content Secondary -->
+    <div class="row">
+        <!-- Posts -->
+        <div class="col-lg-8 blog__content mb-72">
+            <!-- Worldwide News -->
+            <section class="section">
+                <div class="title-wrap title-wrap--line">
+                    <h3 class="section-title">Worldwide</h3>
+                    <a class="all-posts-url" href="#">View All</a>
+                </div>
+
+                <partial name="~/Views/Shared/_WordlWidePartial.cshtml" />
+            </section>
+            <!-- end worldwide news -->
+            <!-- Pagination -->
+            <nav class="pagination">
+                <span class="pagination__page pagination__page--current">1</span>
+                <a class="pagination__page" href="#">2</a>
+                <a class="pagination__page" href="#">3</a>
+                <a class="pagination__page" href="#">4</a>
+                <a class="pagination__page pagination__icon pagination__page--next" href="#">
+                    <i class="ui-arrow-right"></i>
+                </a>
+            </nav>
+
+        </div>
+        <!-- end posts -->
+
+        <!-- Sidebar 1 -->
+        <aside class="col-lg-4 sidebar sidebar--1 sidebar--right">
+            <!-- Widget Categories -->
+            <aside class="widget widget_categories">
+                <h4 class="widget-title">Categories</h4>
+                <partial name="~/Views/Home/_CategoriesPartial.cshtml" />
+            </aside>
+            <!-- end widget categories -->
+
+            <!-- Widget Recommended (Rating) -->
+            <aside class="widget widget-rating-posts">
+                <h4 class="widget-title">Recommended</h4>
+                <partial name="~/Views/Home/_RecommenedPostPartial.cshtml" />
+            </aside> 
+            <!-- end widget recommended (rating) -->
+        </aside>
+        <!-- end sidebar 1 -->
+    </div>
+    <!-- content secondary -->
+</div>
+<!-- end main container -->

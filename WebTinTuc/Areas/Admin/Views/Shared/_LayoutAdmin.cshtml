@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin - @ViewData["Title"]</title>
+    <link href="~/lib/kendo/styles/kendo.common-material.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/lib/kendo/styles/kendo.material.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+
+    @RenderSection("Styles", required: false)
+
+    <script src="~/lib/kendo/js/jquery.min.js"></script>
+    <script src="~/lib/kendo/js/jszip.min.js"></script>
+    <script src="~/lib/kendo/js/kendo.all.min.js"></script>
+    <script src="~/lib/kendo/js/kendo.aspnetmvc.min.js"></script>
+</head>
+<body>
+    <div class="container" style="margin-top:16px;margin-bottom:16px;">
+        @RenderBody()
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

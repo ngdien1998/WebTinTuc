@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tin tức - @ViewData["Title"]</title>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+    <meta content="" name="description">
+
+    <!-- Google Fonts -->
+    <link href="~/css/font-icons.css" rel="stylesheet">
+
+    <!-- Css -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/font-icons.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.ico" rel="shortcut icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="~/img/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="~/img/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+
+    @RenderSection("Styles", required: false)
+
+    <!-- Lazyload (must be placed in head in order to work) -->
+    <script src="~/js/lazysizes.min.js"></script>
+</head>
+
+<body class="bg-light style-default style-rounded">
+    <!-- Preloader -->
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Bg Overlay -->
+    <div class="content-overlay"></div>
+
+    <!-- Sidenav -->
+    <header class="sidenav" id="sidenav">
+        <partial name="~/Views/Shared/_SidebarPartial.cshtml" />
+    </header>
+    <!-- end sidenav -->
+
+    <main class="main oh" id="main">
+        <!-- Navigation -->
+        <header class="nav">
+            <partial name="~/Views/Shared/_NavbarPartial.cshtml" />
+        </header>
+        <!-- end navigation -->
+
+        @RenderBody()
+    </main>
+    <!-- end main-wrapper -->
+    <!-- Footer -->
+    <footer class="footer footer--dark">
+        <partial name="~/Views/Shared/_FooterPartial.cshtml" />
+    </footer>
+    <!-- end footer -->
+
+    <div id="back-to-top">
+        <a aria-label="Go to top" href="#top"><i class="ui-arrow-up"></i></a>
+    </div>
+
+    <!-- jQuery Scripts -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/easing.min.js"></script>
+    <script src="~/js/owl-carousel.min.js"></script>
+    <script src="~/js/flickity.pkgd.min.js"></script>
+    <script src="~/js/twitterFetcher_min.js"></script>
+    <script src="~/js/jquery.newsTicker.min.js"></script>
+    <script src="~/js/modernizr.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
