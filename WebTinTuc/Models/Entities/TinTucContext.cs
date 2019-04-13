@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace WebTinTuc.Model.Entities
+namespace WebTinTuc.Models.Entities
 {
     public partial class TinTucContext : DbContext
     {

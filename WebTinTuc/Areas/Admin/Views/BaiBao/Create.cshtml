@@ -1,0 +1,64 @@
+﻿@model BaiBao
+@{
+    ViewData["Title"] = "Viết bài";
+}
+    <form asp-action="Create" asp-controller="BaiBao" method="post">
+        <label asp-for="TieuDe">Tiêu đề</label>
+        <input asp-for="TieuDe" class="k-textbox" style="min-width:100%;margin-bottom:4px;" />
+
+        <label asp-for="TomTat">Tóm tắt</label>
+        <textarea asp-for="TieuDe" class="k-textbox" rows="4" style="min-width:100%;margin-bottom:4px;padding:10px;"></textarea>
+
+        <label asp-for="NoiDung">Nội dung</label>
+        @(Html.Kendo().EditorFor(model => model.NoiDung)
+        .HtmlAttributes(new { style = "width:100%;height:700px" })
+        .Tools(tools => tools
+            .Clear()
+            .Bold().Italic().Underline().Strikethrough()
+            .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
+            .InsertUnorderedList().InsertOrderedList()
+            .Outdent().Indent()
+            .CreateLink().Unlink()
+            .InsertImage()
+            .InsertFile()
+            .SubScript()
+            .SuperScript()
+            .TableEditing()
+            .ViewHtml()
+            .Formatting()
+            .CleanFormatting()
+            .FontName()
+            .FontSize()
+            .ForeColor().BackColor()
+            .Print())
+            .ImageBrowser(browser => browser
+            .Image("~/shared/user-files/images/{0}")
+                .Read("Read", "ImageBrowser")
+                .Create("Create", "ImageBrowser")
+                .Destroy("Destroy", "ImageBrowser")
+                .Upload("Upload", "ImageBrowser"))
+            .Resizable(true))
+
+        <label asp-for="HinhAnh">Hình ảnh</label>
+        @(Html.Kendo().EditorFor(model => model.HinhAnh)
+        .HtmlAttributes(new { style = "min-width:100%;margin-bottom:4px;" })
+        .Tools(tools => tools.InsertImage())
+        .ImageBrowser(browser => browser
+            .Image("~/shared/user-files/images/{0}")
+            .Read("Read", "ImageBrowser")
+            .Create("Create", "ImageBrowser")
+            .Destroy("Destroy", "ImageBrowser")
+            .Upload("Upload", "ImageBrowser")))
+
+        <label asp-for="IdDanhMuc">Danh mục</label>
+        @(Html.Kendo().ComboBoxFor(model => model.IdDanhMuc)
+            .HtmlAttributes(new { style = "min-width:100%;" })
+            .Filter("contains")
+            .Placeholder("Chọn hoặc thêm mới danh mục")
+            .DataTextField("TenDanhMuc")
+            .DataValueField("IdDanhMuc")
+        //.BindTo(ViewBag.DanhMuc)
+        .Suggest(true))
+
+        <input type="submit" value="Đăng bài" class="k-button k-primary" style="margin-top:10px;" />
+    </form>

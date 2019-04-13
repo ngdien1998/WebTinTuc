@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
-using WebTinTuc.Model.Entities;
+using WebTinTuc.Areas.Admin.Models.Services;
+using WebTinTuc.Models.Entities;
 
 namespace WebTinTuc
 {
@@ -41,6 +36,12 @@ namespace WebTinTuc
 
             // Add Kendo UI services to the services container
             services.AddKendo();
+
+            // Add dependencies
+            services.AddScoped<IDataRepository<BaiBao>, BaiBaoService>();
+            services.AddScoped<IDataRepository<BinhLuan>, BinhLuanService>();
+            services.AddScoped<IDataRepository<DanhMuc>, DanhMucService>();
+            services.AddScoped<IDataRepository<QuanTriVien>, QuanTriVienService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

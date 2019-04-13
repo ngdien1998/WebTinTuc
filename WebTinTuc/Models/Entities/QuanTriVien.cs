@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace WebTinTuc.Model.Entities
+namespace WebTinTuc.Models.Entities
 {
     public partial class QuanTriVien
     {

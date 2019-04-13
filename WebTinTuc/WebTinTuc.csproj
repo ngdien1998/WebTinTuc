@@ -2181,7 +2181,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Models\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\js\bootstrap.min.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
