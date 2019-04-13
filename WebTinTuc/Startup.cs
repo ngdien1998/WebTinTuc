@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using WebTinTuc.Model.Entities;
 
 namespace WebTinTuc
 {
@@ -32,6 +34,10 @@ namespace WebTinTuc
                 // Maintain property names during serialization. See:
                 // https://github.com/aspnet/Announcements/issues/194
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
+            // Add entity framwork
+            services.AddDbContext<TinTucContext>(options =>
+                options.UseMySQL(Configuration.GetConnectionString("TinTucContext")));
 
             // Add Kendo UI services to the services container
             services.AddKendo();
