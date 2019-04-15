@@ -1,0 +1,25 @@
+﻿@model BaiBao
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="admin-card" style="text-align:left;min-height:unset;">
+    <div class="admin-card-title">
+        <h2 style="text-transform:uppercase;">Xóa bài báo</h2>
+    </div>
+
+    <h2><strong>@Model.TieuDe.ToUpper()</strong></h2>
+    <h6>ĐĂNG BỞI <strong>@Model.UsernameNavigation.HoTen.ToUpper()</strong> VÀO LÚC <strong>@Model.ThoiGianTao.ToString("dd/MM/yyyy hh:mm")</strong></h6>
+    <h5 style="padding:16px 0;">@Model.TomTat</h5>
+    <div>@Html.Raw(@Model.NoiDung)</div>
+
+    <hr />
+    <form asp-action="Delete" method="post" style="text-align:right;">
+        <input type="hidden" asp-for="IdBaiBao" />
+        <input type="submit" value="Xác nhận xóa bài báo này" class="k-button" style="background-color:#f44336;border-color:#e53935;color:#FFF;" />
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index" class="k-button">Về trang danh sách bài báo</a>
+</div>

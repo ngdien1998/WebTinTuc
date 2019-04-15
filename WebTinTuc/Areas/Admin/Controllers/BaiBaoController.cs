@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using WebTinTuc.Areas.Admin.Models.Services;
 using WebTinTuc.Models.Entities;
 
@@ -28,7 +27,9 @@ namespace WebTinTuc.Areas.Admin.Controllers
                 return RedirectToAction(nameof(DashboardController.Login), "Dashboard");
             }
 
-            return View(baiBaoRepository.GetAll());
+            var currentUsername = HttpContext.Session.GetString(DashboardController.AdminUsername);
+            var model = baiBaoRepository.GetAll().ToList().Where(e => e.Username == currentUsername);
+            return View(model);
         }
 
         [Route("viet-bai")]
@@ -39,7 +40,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
                 return RedirectToAction(nameof(DashboardController.Login), "Dashboard");
             }
 
-            ViewBag.DanhMuc = danhMucRepository.GetAll().ToList();
+            ViewBag.DanhMuc = danhMucRepository.GetAll();
             return View();
         }
 
@@ -54,15 +55,111 @@ namespace WebTinTuc.Areas.Admin.Controllers
             {
                 baiBao.Username = HttpContext.Session.GetString(DashboardController.AdminUsername);
                 baiBao.ThoiGianTao = DateTime.Now;
-                var imgUrl = Regex.Match(baiBao.HinhAnh, "src=\"(.+?)\"").Groups[0].Value;
-                baiBao.HinhAnh = imgUrl.Substring(5, imgUrl.Length - 6);
 
                 baiBaoRepository.Add(baiBao);
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.DanhMuc = danhMucRepository.GetAll().ToList();
+            ViewBag.DanhMuc = danhMucRepository.GetAll();
             return View(baiBao);
+        }
+
+        [Route("sua/{id}")]
+        public IActionResult Edit([FromRoute(Name = "id")] long? idBaiBao)
+        {
+            if (idBaiBao == null)
+            {
+                return BadRequest();
+            }
+
+            var entity = baiBaoRepository.Get(idBaiBao);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.DanhMuc = danhMucRepository.GetAll();
+            return View(entity);
+        }
+
+        [HttpPost]
+        [Route("sua/{id}")]
+        public IActionResult Edit([FromRoute(Name = "id")] long idBaiBao, BaiBao baiBao)
+        {
+            if (idBaiBao != baiBao.IdBaiBao)
+            {
+                return BadRequest();
+            }
+
+            var entity = baiBaoRepository.Get(idBaiBao);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            ModelState.MarkFieldSkipped(nameof(BaiBao.ThoiGianTao));
+            ModelState.MarkFieldSkipped(nameof(BaiBao.Username));
+
+            if (ModelState.IsValid)
+            {
+                baiBaoRepository.Update(entity, baiBao);
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.DanhMuc = danhMucRepository.GetAll();
+            return View(baiBao);
+        }
+
+        [Route("xem/{id}")]
+        public IActionResult Details([FromRoute(Name = "id")] long? idBaiBao)
+        {
+            if (idBaiBao == null)
+            {
+                return BadRequest();
+            }
+
+            var entity = baiBaoRepository.Get(idBaiBao);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            return View(entity);
+        }
+
+        [Route("xoa/{id}")]
+        public IActionResult Delete([FromRoute(Name = "id")] long? idBaiBao)
+        {
+            if (idBaiBao == null)
+            {
+                return BadRequest();
+            }
+
+            var entity = baiBaoRepository.Get(idBaiBao);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+            return View(entity);
+        }
+
+        [HttpPost]
+        [Route("xoa/{id}")]
+        public IActionResult ConfirmDelete([FromRoute(Name = "id")] long? idBaiBao)
+        {
+            if (idBaiBao == null)
+            {
+                return BadRequest();
+            }
+
+            var entity = baiBaoRepository.Get(idBaiBao);
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            baiBaoRepository.Delete(entity);
+            return RedirectToAction(nameof(Index));
         }
 
         private bool AlreadyLogined()

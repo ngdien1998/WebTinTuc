@@ -27,7 +27,12 @@ namespace WebTinTuc.Areas.Admin.Models.Services
 
         public BaiBao Get(object id)
         {
-            return context.BaiBao.Find(id);
+            return context.BaiBao
+                .Include(e => e.UsernameNavigation)
+                .Include(e => e.IdDanhMucNavigation)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.IdBaiBao == (long)id)
+                .Result;
         }
 
         public IEnumerable<BaiBao> GetAll()
@@ -41,10 +46,7 @@ namespace WebTinTuc.Areas.Admin.Models.Services
             dbEntity.TomTat = entity.TomTat;
             dbEntity.NoiDung = entity.NoiDung;
             dbEntity.HinhAnh = entity.HinhAnh;
-            dbEntity.ThoiGianTao = entity.ThoiGianTao;
-            dbEntity.Username = entity.Username;
             dbEntity.IdDanhMuc = entity.IdDanhMuc;
-            dbEntity.LuotXem = entity.LuotXem;
             dbEntity.Tags = entity.Tags;
 
             context.SaveChanges();

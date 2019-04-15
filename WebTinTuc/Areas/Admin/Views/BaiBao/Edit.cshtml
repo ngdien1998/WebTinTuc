@@ -1,14 +1,16 @@
 ﻿@model BaiBao
 @{
-    ViewData["Title"] = "Viết bài";
+    ViewData["Title"] = "Sửa bài báo";
 }
 
 <div class="admin-card" style="text-align:left;">
     <div class="admin-card-title">
-        <h2 style="text-transform:uppercase;">Thêm bài báo</h2>
+        <h2 style="text-transform:uppercase;">Sửa bài báo</h2>
     </div>
 
-    <form asp-action="Create" asp-controller="BaiBao" method="post">
+    <form asp-action="Edit" asp-controller="BaiBao" method="post">
+        <input type="hidden" asp-for="IdBaiBao" />
+
         <div class="form-group">
             <label asp-for="TieuDe">Tiêu đề</label>
             <input asp-for="TieuDe" class="k-textbox" style="min-width:100%;margin-bottom:4px;" autocomplete="off" />
@@ -78,7 +80,7 @@
                 .BindTo(ViewBag.DanhMuc))
         </div>
 
-        <input type="submit" value="Đăng bài" class="k-button k-primary" style="margin-top:10px;" />
+        <input type="submit" value="Sửa bài báo" class="k-button k-primary" style="margin-top:10px;" />
     </form>
 </div>
 

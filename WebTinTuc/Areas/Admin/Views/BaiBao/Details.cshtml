@@ -1,0 +1,20 @@
+﻿@model BaiBao
+@{
+    ViewData["Title"] = "Xem chi tiết";
+}
+
+    <div class="admin-card" style="text-align:left;">
+        <div class="admin-card-title">
+            <h2 style="text-transform:uppercase;">Xem bài báo</h2>
+        </div>
+
+        <h3>@Model.TieuDe</h3>
+        <h6>ĐĂNG BỞI <strong>@Model.UsernameNavigation.HoTen.ToUpper()</strong> VÀO LÚC <strong>@Model.ThoiGianTao.ToString("dd/MM/yyyy hh:mm")</strong></h6>
+        <h4>@Model.TomTat</h4>
+        <div>@Html.Raw(@Model.NoiDung)</div>
+    </div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdBaiBao" class="k-button k-primary">Sửa bài báo này</a>
+    <a asp-action="Index" class="k-button">Về trang danh sách bài báo</a>
+</div>

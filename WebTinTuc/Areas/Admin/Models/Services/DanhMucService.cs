@@ -35,7 +35,7 @@ namespace WebTinTuc.Areas.Admin.Models.Services
 
         public IEnumerable<DanhMuc> GetAll()
         {
-            return context.DanhMuc;
+            return context.DanhMuc.AsNoTracking();
         }
 
         public void Update(DanhMuc dbEntity, DanhMuc entity)
