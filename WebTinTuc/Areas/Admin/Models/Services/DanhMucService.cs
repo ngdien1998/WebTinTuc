@@ -35,7 +35,7 @@ namespace WebTinTuc.Areas.Admin.Models.Services
 
         public IEnumerable<DanhMuc> GetAll()
         {
-            return context.DanhMuc.Include(e => e.BaiBao);
+            return context.DanhMuc;
         }
 
         public void Update(DanhMuc dbEntity, DanhMuc entity)

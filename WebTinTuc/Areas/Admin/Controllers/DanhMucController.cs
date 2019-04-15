@@ -5,6 +5,7 @@ using WebTinTuc.Models.Entities;
 namespace WebTinTuc.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("admin/danh-muc")]
     public class DanhMucController : Controller
     {
         private readonly IDataRepository<DanhMuc> repository;
@@ -19,12 +20,14 @@ namespace WebTinTuc.Areas.Admin.Controllers
             return View(repository.GetAll());
         }
 
+        [Route("them-moi")]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Route("them-moi")]
         [AutoValidateAntiforgeryToken]
         public IActionResult Create(DanhMuc danhMuc)
         {
@@ -36,6 +39,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
             return View(danhMuc);
         }
 
+        [Route("sua/{id}")]
         public IActionResult Edit([FromRoute(Name = "id")] long? idDanhMuc)
         {
             if (idDanhMuc == null)
@@ -52,6 +56,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Route("sua/{id}")]
         [AutoValidateAntiforgeryToken]
         public IActionResult Edit([FromRoute(Name = "id")] long? idDanhMuc, DanhMuc danhMuc)
         {
@@ -73,6 +78,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
             return View(danhMuc);
         }
 
+        [Route("xoa/{id}")]
         public IActionResult Delete([FromRoute(Name = "id")] long? idDanhMuc)
         {
             if (idDanhMuc == null)
@@ -89,6 +95,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [Route("xoa/{id}")]
         [ActionName("Delete")]
         public IActionResult ConfirmDelete([FromRoute(Name = "id")] long? idDanhMuc)
         {

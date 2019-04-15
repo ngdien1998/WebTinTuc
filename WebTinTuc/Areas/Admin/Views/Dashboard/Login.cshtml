@@ -1,0 +1,17 @@
+﻿@model AdminUserViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="admin-card" style="width:400px;text-align:left;margin:auto;">
+    <form asp-action="Login" asp-controller="Dashboard" method="post">
+        <h3 style="margin-bottom:24px;">ĐĂNG NHẬP</h3>
+        <label asp-for="Username">Tên đăng nhập</label>
+        <input type="text" asp-for="Username" class="k-textbox" style="width:100%;margin-bottom:8px;" />
+
+        <label asp-for="Username">Mật khẩu</label>
+        <input type="password" asp-for="MatKhau" class="k-textbox" style="width:100%;margin-bottom:8px;" />
+
+        <input type="submit" class="k-button k-primary" value="Đăng nhập" />
+    </form>
+</div>

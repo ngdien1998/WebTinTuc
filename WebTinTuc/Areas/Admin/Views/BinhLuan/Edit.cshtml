@@ -1,0 +1,56 @@
+﻿@model WebTinTuc.Models.Entities.BinhLuan
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>BinhLuan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdBinhLuan" />
+            <div class="form-group">
+                <label asp-for="NoiDung" class="control-label"></label>
+                <input asp-for="NoiDung" class="form-control" />
+                <span asp-validation-for="NoiDung" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenNguoiBl" class="control-label"></label>
+                <input asp-for="TenNguoiBl" class="form-control" />
+                <span asp-validation-for="TenNguoiBl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThoiGian" class="control-label"></label>
+                <input asp-for="ThoiGian" class="form-control" />
+                <span asp-validation-for="ThoiGian" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdBlcha" class="control-label"></label>
+                <select asp-for="IdBlcha" class="form-control" asp-items="ViewBag.IdBlcha"></select>
+                <span asp-validation-for="IdBlcha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdBaiBao" class="control-label"></label>
+                <select asp-for="IdBaiBao" class="form-control" asp-items="ViewBag.IdBaiBao"></select>
+                <span asp-validation-for="IdBaiBao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,54 @@
+﻿@model WebTinTuc.Models.Entities.BinhLuan
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BinhLuan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNguoiBl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenNguoiBl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGian)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGian)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdBaiBaoNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdBaiBaoNavigation.HinhAnh)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdBlchaNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdBlchaNavigation.IdBinhLuan)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.IdBinhLuan">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

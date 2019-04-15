@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using WebTinTuc.Models.Entities;
 
 namespace WebTinTuc.Areas.Admin.Models.Services
@@ -31,7 +32,7 @@ namespace WebTinTuc.Areas.Admin.Models.Services
 
         public IEnumerable<BaiBao> GetAll()
         {
-            return context.BaiBao;
+            return context.BaiBao.Include(e => e.UsernameNavigation);
         }
 
         public void Update(BaiBao dbEntity, BaiBao entity)
