@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using WebTinTuc.Models.Entities;
 
 namespace WebTinTuc.Areas.Admin.Models.Services
@@ -44,6 +46,19 @@ namespace WebTinTuc.Areas.Admin.Models.Services
             dbEntity.IdBaiBao = entity.IdBaiBao;
 
             context.SaveChanges();
+        }
+
+        public IEnumerable<BinhLuan> ListBinhLuanOf(object idBaiBao)
+        {
+            var baiBao = context.BaiBao
+                .Include(e => e.BinhLuan)
+                .FirstOrDefault(e => e.IdBaiBao == (long)idBaiBao);
+
+            if (baiBao == null)
+            {
+                return null;
+            }
+            return baiBao.BinhLuan;
         }
     }
 }
