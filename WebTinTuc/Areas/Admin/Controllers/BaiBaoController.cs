@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using WebTinTuc.Areas.Admin.Models.Services;
 using WebTinTuc.Models.Entities;
 
@@ -55,6 +56,8 @@ namespace WebTinTuc.Areas.Admin.Controllers
             {
                 baiBao.Username = HttpContext.Session.GetString(DashboardController.AdminUsername);
                 baiBao.ThoiGianTao = DateTime.Now;
+                var imgSrc = Regex.Match(baiBao.HinhAnh, "src=\"(.+?)\"").Groups[1].Value;
+                baiBao.HinhAnh = imgSrc.Substring(5, imgSrc.Length - 6);
 
                 baiBaoRepository.Add(baiBao);
 
@@ -102,6 +105,9 @@ namespace WebTinTuc.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                var imgSrc = Regex.Match(baiBao.HinhAnh, "src=\"(.+?)\"").Groups[1].Value;
+                baiBao.HinhAnh = imgSrc.Substring(5, imgSrc.Length - 6);
+
                 baiBaoRepository.Update(entity, baiBao);
                 return RedirectToAction(nameof(Index));
             }

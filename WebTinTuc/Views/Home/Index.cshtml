@@ -1,4 +1,4 @@
-﻿
+﻿@model HomeViewModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -6,7 +6,7 @@
 <!-- Trending Now -->
 <div class="container">
     <div class="trending-now">
-        <partial name="~/Views/Shared/_TrendingPartial.cshtml" />
+        <partial name="~/Views/Home/_TrendingPartial.cshtml" model="Model.TrendingPosts" />
     </div>
 </div>
 
@@ -14,7 +14,7 @@
 <section class="featured-posts-grid">
     <div class="container">
         <div class="row row-8">
-            <partial name="~/Views/Home/_FeaturePostsPartial.cshtml" />
+            <partial name="~/Views/Home/_FeaturePostsPartial.cshtml" model="Model.FeaturedPosts" />
         </div>
     </div>
 </section>
@@ -28,7 +28,7 @@
         <div class="col-lg-8 blog__content">
             <!-- Latest News -->
             <section class="section tab-post mb-16">
-                <partial name="~/Views/Home/_LastestNewsPartial.cshtml" />
+                <partial name="~/Views/Home/_LastestNewsPartial.cshtml" model="Model.LastestNews" />
             </section>
             <!-- end latest news -->
         </div>
@@ -38,7 +38,7 @@
         <aside class="col-lg-4 sidebar sidebar--right">
             <!-- Widget Popular Posts -->
             <aside class="widget widget-popular-posts">
-                <partial name="~/Views/Home/_PopularPostsPartial.cshtml" />
+                <partial name="~/Views/Home/_PopularPostsPartial.cshtml" model="Model.PopularPosts" />
             </aside>
             <!-- end widget popular posts -->
 
@@ -52,8 +52,7 @@
                 <form class="mc4wp-form" method="post">
                     <div class="mc4wp-form-fields">
                         <div class="form-group">
-                            <input name="EMAIL" placeholder="Your email" required=""
-                                   type="email">
+                            <input name="EMAIL" placeholder="Your email" required="" type="email">
                         </div>
                         <div class="form-group">
                             <input class="btn btn-lg btn-color" type="submit" value="Sign Up">
@@ -69,39 +68,33 @@
                 <div class="socials socials--wide socials--large">
                     <div class="row row-16">
                         <div class="col">
-                            <a aria-label="facebook" class="social social-facebook" href="#"
-                               target="_blank" title="facebook">
+                            <a aria-label="facebook" class="social social-facebook" href="#" target="_blank" title="facebook">
                                 <i class="ui-facebook"></i>
                                 <span class="social__text">Facebook</span>
                             </a>
 
-                            <a aria-label="twitter" class="social social-twitter" href="#" target="_blank"
-                               title="twitter">
+                            <a aria-label="twitter" class="social social-twitter" href="#" target="_blank" title="twitter">
                                 <i class="ui-twitter"></i>
                                 <span class="social__text">Twitter</span>
                             </a>
 
-                            <a aria-label="youtube" class="social social-youtube" href="#" target="_blank"
-                               title="youtube">
+                            <a aria-label="youtube" class="social social-youtube" href="#" target="_blank" title="youtube">
                                 <i class="ui-youtube"></i>
                                 <span class="social__text">Youtube</span>
                             </a>
                         </div>
                         <div class="col">
-                            <a aria-label="google" class="social social-google-plus" href="#"
-                               target="_blank" title="google">
+                            <a aria-label="google" class="social social-google-plus" href="#" target="_blank" title="google">
                                 <i class="ui-google"></i>
                                 <span class="social__text">Google+</span>
                             </a>
 
-                            <a aria-label="instagram" class="social social-instagram" href="#"
-                               target="_blank" title="instagram">
+                            <a aria-label="instagram" class="social social-instagram" href="#" target="_blank" title="instagram">
                                 <i class="ui-instagram"></i>
                                 <span class="social__text">Instagram</span>
                             </a>
 
-                            <a aria-label="rss" class="social social-rss" href="#" target="_blank"
-                               title="rss">
+                            <a aria-label="rss" class="social social-rss" href="#" target="_blank" title="rss">
                                 <i class="ui-rss"></i>
                                 <span class="social__text">Rss</span>
                             </a>
@@ -123,7 +116,7 @@
 
         <!-- Slider -->
         <div class="owl-carousel owl-theme owl-carousel--arrows-outside" id="owl-posts">
-            <partial name="~/Views/Home/_HotNewsPartial.cshtml" />
+            <partial name="~/Views/Home/_HotNewsPartial.cshtml" model="@Model.HotNews" />
         </div>
         <!-- end slider -->
     </section>
@@ -132,9 +125,9 @@
     <!-- Posts from categories -->
     <section class="section mb-0">
         <div class="row">
-            @for (int i = 0; i < 4; i++)
+            @foreach (var danhMuc in Model.Categories)
             {
-                <partial name="~/Views/Home/_PostsFromCategoryPartial.cshtml" />
+                <partial name="~/Views/Home/_PostsFromCategoryPartial.cshtml" model="danhMuc" />
             }
         </div>
     </section>
@@ -151,7 +144,7 @@
                     <a class="all-posts-url" href="#">View All</a>
                 </div>
 
-                <partial name="~/Views/Shared/_WordlWidePartial.cshtml" />
+                <partial name="~/Views/Home/_WordlWidePartial.cshtml" model="@Model.RandomCategory" />
             </section>
             <!-- end worldwide news -->
             <!-- Pagination -->
@@ -173,16 +166,9 @@
             <!-- Widget Categories -->
             <aside class="widget widget_categories">
                 <h4 class="widget-title">Categories</h4>
-                <partial name="~/Views/Home/_CategoriesPartial.cshtml" />
+                <partial name="~/Views/Home/_CategoriesPartial.cshtml" model="@Model.Categories" />
             </aside>
             <!-- end widget categories -->
-
-            <!-- Widget Recommended (Rating) -->
-            <aside class="widget widget-rating-posts">
-                <h4 class="widget-title">Recommended</h4>
-                <partial name="~/Views/Home/_RecommenedPostPartial.cshtml" />
-            </aside> 
-            <!-- end widget recommended (rating) -->
         </aside>
         <!-- end sidebar 1 -->
     </div>
