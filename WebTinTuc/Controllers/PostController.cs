@@ -1,16 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using WebTinTuc.Models.Entities;
 
 namespace WebTinTuc.Controllers
 {
+    [Route("bai-bao")]
     public class PostController : Controller
     {
-        public IActionResult Index()
+
+        private readonly TinTucContext context;
+
+        public PostController(TinTucContext context)
         {
-            return View();
+            this.context = context;
+        }
+
+        [Route("{id}/{*name}")]
+        public IActionResult Index(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var baiBao = context.BaiBao.Find(id);
+            if (baiBao == null)
+            {
+                return NotFound();
+            }
+            return View(baiBao);
         }
     }
 }
