@@ -30,7 +30,6 @@
     <None Include="wwwroot\js\bootstrap.min.js" />
     <None Include="wwwroot\js\easing.min.js" />
     <None Include="wwwroot\js\flickity.pkgd.min.js" />
-    <None Include="wwwroot\js\jquery.min.js" />
     <None Include="wwwroot\js\jquery.newsTicker.min.js" />
     <None Include="wwwroot\js\jquery.sticky-kit.min.js" />
     <None Include="wwwroot\js\lazysizes.min.js" />
@@ -2179,10 +2178,6 @@
     <None Include="wwwroot\lib\kendo\styles\kendo.silver.mobile.min.css.map" />
     <None Include="wwwroot\lib\kendo\styles\kendo.uniform.min.css.map" />
     <None Include="wwwroot\lib\kendo\styles\kendo.uniform.mobile.min.css.map" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Services\" />
   </ItemGroup>
 
   <ItemGroup>

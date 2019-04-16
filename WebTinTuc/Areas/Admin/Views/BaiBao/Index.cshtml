@@ -2,14 +2,6 @@
 @{
     ViewData["Title"] = "Bài báo";
 }
-<style>
-    img {
-        max-width:100%;
-        height:148px;
-        border-radius:8px;
-        border:1px solid #bcbcbc;
-    }
-</style>
 
 <div class="row" style="margin-bottom:1em;">
     <a asp-action="Create" asp-controller="BaiBao" class="k-button k-primary">Thêm bài báo</a>
@@ -21,7 +13,7 @@
         <div class="col-3" style="padding-left:0;">
             <div class="admin-card">
                 <h6>POST ID: <b>@baiBao.IdBaiBao</b></h6>
-                @Html.Raw(baiBao.HinhAnh)
+                <img style="max-width:100%;height:148px;border-radius:8px;border:1px solid #bcbcbc;" src="@baiBao.HinhAnh" alt="Hinh Bai Bao" />
                 <h5><strong>
                     @(baiBao.TieuDe.Length > 25 ? 
                         new String(baiBao.TieuDe.Take(25).ToArray()).ToUpper() + "..." 

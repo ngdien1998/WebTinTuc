@@ -7,12 +7,12 @@
             <div class="bottom-gradient"></div>
             <div class="thumb-text-holder">
                 <h2 class="thumb-entry-title">
-                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe">
+                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()">
                         @baiBao.TieuDe
                     </a>
                 </h2>
             </div>
-            <a class="thumb-url" href="single-post.html"asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe"></a>
+            <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()"></a>
         </div>
     </article>
 }

@@ -56,8 +56,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
             {
                 baiBao.Username = HttpContext.Session.GetString(DashboardController.AdminUsername);
                 baiBao.ThoiGianTao = DateTime.Now;
-                var imgSrc = Regex.Match(baiBao.HinhAnh, "src=\"(.+?)\"").Groups[1].Value;
-                baiBao.HinhAnh = imgSrc.Substring(5, imgSrc.Length - 6);
+                baiBao.HinhAnh = Regex.Match(baiBao.HinhAnh, "src=\"(.+?)\"").Groups[1].Value;
 
                 baiBaoRepository.Add(baiBao);
 
@@ -105,8 +104,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                var imgSrc = Regex.Match(baiBao.HinhAnh, "src=\"(.+?)\"").Groups[1].Value;
-                baiBao.HinhAnh = imgSrc.Substring(5, imgSrc.Length - 6);
+                baiBao.HinhAnh = Regex.Match(baiBao.HinhAnh, "src=\"(.+?)\"").Groups[1].Value;
 
                 baiBaoRepository.Update(entity, baiBao);
                 return RedirectToAction(nameof(Index));

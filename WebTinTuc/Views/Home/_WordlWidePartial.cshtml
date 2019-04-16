@@ -3,9 +3,8 @@
 @foreach (var baiBao in Model)
 {
     <article class="entry card post-list">
-        <div class="entry__img-holder post-list__img-holder card__img-holder"
-             style="background-image: url(img/content/list/list_post_1.jpg)">
-            <a class="thumb-url" href="single-post.html"></a>
+        <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url('@baiBao.HinhAnh')">
+            <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe"></a>
             <img alt="" class="entry__img d-none"
                  src="@baiBao.HinhAnh">
             <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue"
@@ -30,7 +29,7 @@
             </div>
             <div class="entry__excerpt">
                 <p>
-                    @(new string(baiBao[i].TomTat.Take(70).ToArray()) + " ...")
+                    @(new string(baiBao.TomTat.Take(70).ToArray()) + " ...")
                 </p>
             </div>
         </div>

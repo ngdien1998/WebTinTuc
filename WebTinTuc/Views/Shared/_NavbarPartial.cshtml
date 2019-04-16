@@ -1,4 +1,6 @@
-﻿<div class="nav__holder nav--sticky" style="width:100%;">
+﻿@model List<DanhMuc>
+
+<div class="nav__holder nav--sticky" style="width:100%;">
     <div class="container relative">
         <div class="flex-parent">
             <!-- Side Menu Button -->
@@ -8,116 +10,81 @@
                 </span>
             </button>
 
-            <!-- Logo -->
-            <a class="logo" href="index.html">
-                <img alt="logo" class="logo__img" src="img/logo_default.png" srcset="img/logo_default.png 1x, img/logo_default@2x.png 2x">
-            </a>
-
             <!-- Nav-wrap -->
             <nav class="flex-child nav__wrap d-none d-lg-block">
                 <ul class="nav__menu">
-                    <li class="nav__dropdown">
-                        <a href="#">Posts</a>
+                    <li class="nav__dropdown active">
+                        <a href="#">@Model[0].TenDanhMuc</a>
+                        @{
+                            var baiBao = Model[0].BaiBao.Take(4).ToArray();
+                        }
                         <ul class="nav__dropdown-menu nav__megamenu" style="width:1050px;left:-50%;">
                             <li>
                                 <div class="nav__megamenu-wrap">
                                     <div class="row">
-                                        <div class="col nav__megamenu-item">
-                                            <article class="entry">
-                                                <div class="entry__img-holder">
-                                                    <a href="single-post.html">
-                                                        <img alt="" class="entry__img"
-                                                             src="img/content/grid/grid_post_1.jpg">
-                                                    </a>
-                                                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
-                                                       href="categories.html">world</a>
-                                                </div>
-
-                                                <div class="entry__body">
-                                                    <h2 class="entry__title">
+                                        @foreach (var bb in baiBao)
+                                        {
+                                            <div class="col nav__megamenu-item">
+                                                <article class="entry">
+                                                    <div class="entry__img-holder">
                                                         <a href="single-post.html">
-                                                            Follow
-                                                            These Smartphone Habits of
-                                                            Successful Entrepreneurs
+                                                            <img alt="" class="entry__img" src="@bb.HinhAnh">
                                                         </a>
-                                                    </h2>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <div class="col nav__megamenu-item">
-                                            <article class="entry">
-                                                <div class="entry__img-holder">
-                                                    <a href="single-post.html">
-                                                        <img alt="" class="entry__img"
-                                                             src="img/content/grid/grid_post_2.jpg">
-                                                    </a>
-                                                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--purple"
-                                                       href="categories.html">fashion</a>
-                                                </div>
+                                                        <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet" href="#">@Model[0].TenDanhMuc</a>
+                                                    </div>
 
-                                                <div class="entry__body">
-                                                    <h2 class="entry__title">
-                                                        <a href="single-post.html">
-                                                            3 Things
-                                                            You Can Do to Get Your Customers
-                                                            Talking About Your Business
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <div class="col nav__megamenu-item">
-                                            <article class="entry">
-                                                <div class="entry__img-holder">
-                                                    <a href="single-post.html">
-                                                        <img alt="" class="entry__img"
-                                                             src="img/content/grid/grid_post_3.jpg">
-                                                    </a>
-                                                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue"
-                                                       href="categories.html">business</a>
-                                                </div>
-
-                                                <div class="entry__body">
-                                                    <h2 class="entry__title">
-                                                        <a href="single-post.html">
-                                                            Lose
-                                                            These 12 Bad Habits If You're
-                                                            Serious About Becoming a
-                                                            Millionaire
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                            </article>
-                                        </div>
-                                        <div class="col nav__megamenu-item">
-                                            <article class="entry">
-                                                <div class="entry__img-holder">
-                                                    <a href="single-post.html">
-                                                        <img alt="" class="entry__img"
-                                                             src="img/content/grid/grid_post_4.jpg">
-                                                    </a>
-                                                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--green"
-                                                       href="categories.html">lifestyle</a>
-                                                </div>
-
-                                                <div class="entry__body">
-                                                    <h2 class="entry__title">
-                                                        <a href="single-post.html">
-                                                            10
-                                                            Horrible Habits You're Doing
-                                                            Right Now That Are Draining Your
-                                                            Energy
-                                                        </a>
-                                                    </h2>
-                                                </div>
-                                            </article>
-                                        </div>
+                                                    <div class="entry__body">
+                                                        <h2 class="entry__title">
+                                                            <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">@bb.TieuDe</a>
+                                                        </h2>
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </li>
-                        </ul> 
+                        </ul>
                         <!-- end megamenu -->
                     </li>
+
+                    @for (int i = 1; i < 9; i++)
+                    {
+                        <li class="nav__dropdown">
+                            <a href="#">@Model[i].TenDanhMuc</a>
+                            @{
+                                baiBao = Model[i].BaiBao.Take(4).ToArray();
+                            }
+                            <ul class="nav__dropdown-menu nav__megamenu" style="width:1050px;left:-50%;">
+                                <li>
+                                    <div class="nav__megamenu-wrap">
+                                        <div class="row">
+                                            @foreach (var bb in baiBao)
+                                            {
+                                                <div class="col nav__megamenu-item">
+                                                    <article class="entry">
+                                                        <div class="entry__img-holder">
+                                                            <a href="single-post.html">
+                                                                <img alt="" class="entry__img" src="@bb.HinhAnh">
+                                                            </a>
+                                                            <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet" href="#">@Model[i].TenDanhMuc</a>
+                                                        </div>
+
+                                                        <div class="entry__body">
+                                                            <h2 class="entry__title">
+                                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe">@bb.TieuDe</a>
+                                                            </h2>
+                                                        </div>
+                                                    </article>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- end megamenu -->
+                        </li>
+                    }
                 </ul> 
                 <!-- end menu -->
             </nav> 

@@ -125,7 +125,7 @@
     <!-- Posts from categories -->
     <section class="section mb-0">
         <div class="row">
-            @foreach (var danhMuc in Model.Categories)
+            @foreach (var danhMuc in Model.CategoriesPost)
             {
                 <partial name="~/Views/Home/_PostsFromCategoryPartial.cshtml" model="danhMuc" />
             }
@@ -147,17 +147,6 @@
                 <partial name="~/Views/Home/_WordlWidePartial.cshtml" model="@Model.RandomCategory" />
             </section>
             <!-- end worldwide news -->
-            <!-- Pagination -->
-            <nav class="pagination">
-                <span class="pagination__page pagination__page--current">1</span>
-                <a class="pagination__page" href="#">2</a>
-                <a class="pagination__page" href="#">3</a>
-                <a class="pagination__page" href="#">4</a>
-                <a class="pagination__page pagination__icon pagination__page--next" href="#">
-                    <i class="ui-arrow-right"></i>
-                </a>
-            </nav>
-
         </div>
         <!-- end posts -->
 
