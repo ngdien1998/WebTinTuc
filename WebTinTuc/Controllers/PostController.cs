@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebTinTuc.Models.Entities;
 
 namespace WebTinTuc.Controllers
@@ -22,7 +23,14 @@ namespace WebTinTuc.Controllers
                 return BadRequest();
             }
 
-            var baiBao = context.BaiBao.Find(id);
+            var baiBao = context.BaiBao
+                .Include(e => e.UsernameNavigation)
+                .Include(e => e.BinhLuan)
+                .Include(e => e.IdDanhMucNavigation)
+                .ThenInclude(e => e.BaiBao)
+                .FirstOrDefaultAsync(e => e.IdBaiBao == id)
+                .Result;
+
             if (baiBao == null)
             {
                 return NotFound();

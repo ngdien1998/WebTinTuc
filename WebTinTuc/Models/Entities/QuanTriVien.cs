@@ -16,6 +16,7 @@ namespace WebTinTuc.Models.Entities
         public DateTime? NgaySinh { get; set; }
         public string GioiTinh { get; set; }
         public string HinhDaiDien { get; set; }
+        public string Bio { get; set; }
         public string Email { get; set; }
         public string ChucVu { get; set; }
 

@@ -1,4 +1,5 @@
-﻿<!-- close -->
+﻿@model List<DanhMuc>
+<!-- close -->
 <div class="sidenav__close">
     <button aria-label="close sidenav" class="sidenav__close-button" id="sidenav__close-button">
         <i class="ui-close sidenav__close-icon"></i>
@@ -8,107 +9,21 @@
 <!-- Nav -->
 <nav class="sidenav__menu-container">
     <ul class="sidenav__menu" role="menubar">
-        <li>
-            <a class="sidenav__menu-url" href="#">Home</a>
-            <button aria-haspopup="true" aria-label="Open dropdown" class="sidenav__menu-toggle">
-                <i class="ui-arrow-down"></i>
-            </button>
-            <ul class="sidenav__menu-dropdown">
-                <li><a class="sidenav__menu-url" href="index.html">Home Default</a></li>
-                <li>
-                    <a class="sidenav__menu-url" href="index-politics.html">Home Politics</a>
-                </li>
-                <li><a class="sidenav__menu-url" href="index-fashion.html">Home Fashion</a></li>
-                <li><a class="sidenav__menu-url" href="index-games.html">Home Games</a></li>
-                <li><a class="sidenav__menu-url" href="index-videos.html">Home Videos</a></li>
-                <li><a class="sidenav__menu-url" href="index-music.html">Home Music</a></li>
-            </ul>
-        </li>
-        <li>
-            <a class="sidenav__menu-url" href="#">Pages</a>
-            <button aria-haspopup="true" aria-label="Open dropdown"
-                    class="sidenav__menu-toggle">
-                <i class="ui-arrow-down"></i>
-            </button>
-            <ul class="sidenav__menu-dropdown">
-                <li><a class="sidenav__menu-url" href="about.html">About</a></li>
-                <li><a class="sidenav__menu-url" href="contact.html">Contact</a></li>
-                <li>
-                    <a class="sidenav__menu-url" href="search-results.html">Search Results</a>
-                </li>
-                <li><a class="sidenav__menu-url" href="categories.html">Categories</a></li>
-                <li><a class="sidenav__menu-url" href="404.html">404</a></li>
-            </ul>
-        </li>
-        <li>
-            <a class="sidenav__menu-url" href="#">Features</a>
-            <button aria-haspopup="true" aria-label="Open dropdown"
-                    class="sidenav__menu-toggle">
-                <i class="ui-arrow-down"></i>
-            </button>
-            <ul class="sidenav__menu-dropdown">
-                <li>
-                    <a class="sidenav__menu-url" href="#">Single Post</a>
-                    <button aria-haspopup="true" aria-label="Open dropdown"
-                            class="sidenav__menu-toggle">
-                        <i class="ui-arrow-down"></i>
-                    </button>
-                    <ul class="sidenav__menu-dropdown">
+        @foreach (var danhMuc in Model)
+        {
+            <li>
+                <a href="#" class="sidenav__menu-url">@danhMuc.TenDanhMuc</a>
+                <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
+                <ul class="sidenav__menu-dropdown" style="display: none;">
+                    @foreach (var baiBao in danhMuc.BaiBao.Take(4))
+                    {
                         <li>
-                            <a class="sidenav__menu-url" href="single-post.html">Style 1</a>
+                            <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()" class="sidenav__menu-url">@baiBao.TieuDe</a>
                         </li>
-                        <li>
-                            <a class="sidenav__menu-url" href="single-post-politics.html">
-                                Style
-                                2
-                            </a>
-                        </li>
-                        <li>
-                            <a class="sidenav__menu-url" href="single-post-fashion.html">
-                                Style
-                                3
-                            </a>
-                        </li>
-                        <li>
-                            <a class="sidenav__menu-url" href="single-post-games.html">
-                                Style
-                                4
-                            </a>
-                        </li>
-                        <li>
-                            <a class="sidenav__menu-url" href="single-post-videos.html">
-                                Style
-                                5
-                            </a>
-                        </li>
-                        <li>
-                            <a class="sidenav__menu-url" href="single-post-music.html">
-                                Style
-                                6
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li><a class="sidenav__menu-url" href="shortcodes.html">Shortcodes</a></li>
-            </ul>
-        </li>
-
-        <!-- Categories -->
-        <li>
-            <a class="sidenav__menu-url" href="#">World</a>
-        </li>
-        <li>
-            <a class="sidenav__menu-url" href="#">Business</a>
-        </li>
-        <li>
-            <a class="sidenav__menu-url" href="#">Fashion</a>
-        </li>
-        <li>
-            <a class="sidenav__menu-url" href="#">Lifestyle</a>
-        </li>
-        <li>
-            <a class="sidenav__menu-url" href="#">Advertise</a>
-        </li>
+                    }
+                </ul>
+            </li>
+        }
     </ul>
 </nav>
 

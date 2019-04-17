@@ -15,7 +15,7 @@
                     <div class="bottom-gradient"></div>
                     <div class="thumb-text-holder thumb-text-holder--1">
                         <h2 class="thumb-entry-title">
-                            <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[0].IdBaiBao" asp-route-name="@baiBao[0].TieuDe">
+                            <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[0].IdBaiBao" asp-route-name="@baiBao[0].TieuDe.ToUrlFriendly()">
                                 @baiBao[0].TieuDe
                             </a>
                         </h2>
@@ -29,7 +29,7 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[0].IdBaiBao" asp-route-name="@baiBao[0].TieuDe"></a>
+                    <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[0].IdBaiBao" asp-route-name="@baiBao[0].TieuDe.ToUrlFriendly()"></a>
                 </div>
             </article>
         </div>
@@ -41,7 +41,7 @@
                         <article class="post-list-small__entry">
                             <div class="post-list-small__body">
                                 <h3 class="post-list-small__entry-title">
-                                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[i].IdBaiBao" asp-route-name="@baiBao[i].TieuDe">@baiBao[i].TieuDe</a>
+                                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[i].IdBaiBao" asp-route-name="@baiBao[i].TieuDe.ToUrlFriendly()">@baiBao[i].TieuDe</a>
                                 </h3>
                             </div>
                         </article>

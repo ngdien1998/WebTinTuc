@@ -42,13 +42,19 @@
                                     <img alt="" class="entry__img lazyload" data-src="@baiBao[i].HinhAnh" src="@baiBao[i].HinhAnh" />
                                 </div>
                             </a>
-                            <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--orange" href="#">@danhMuc.TenDanhMuc</a>
+                            <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--orange"
+                               asp-action="Index"
+                               asp-controller="Category"
+                               asp-route-id="@danhMuc.IdDanhMuc"
+                               asp-route-name="@danhMuc.TenDanhMuc.ToUrlFriendly()">
+                                @danhMuc.TenDanhMuc
+                            </a>
                         </div>
 
                         <div class="entry__body card__body">
                             <div class="entry__header">
                                 <h2 class="entry__title">
-                                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[i].IdBaiBao" asp-route-name="@baiBao[i].TieuDe">@baiBao[i].TieuDe</a>
+                                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[i].IdBaiBao" asp-route-name="@baiBao[i].TieuDe.ToUrlFriendly()">@baiBao[i].TieuDe</a>
                                 </h2>
                                 <ul class="entry__meta">
                                     <li class="entry__meta-author">
@@ -88,13 +94,19 @@
                                         <img alt="" class="entry__img lazyload" data-src="@baiBao[j].HinhAnh" src="@baiBao[j].HinhAnh" />
                                     </div>
                                 </a>
-                                <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--orange" href="#">@danhMuc.TenDanhMuc</a>
+                                <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--orange"
+                                   asp-action="Index"
+                                   asp-controller="Category"
+                                   asp-route-id="@danhMuc.IdDanhMuc"
+                                   asp-route-name="@danhMuc.TenDanhMuc.ToUrlFriendly()">
+                                    @danhMuc.TenDanhMuc
+                                </a>
                             </div>
 
                             <div class="entry__body card__body">
                                 <div class="entry__header">
                                     <h2 class="entry__title">
-                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[j].IdBaiBao" asp-route-name="@baiBao[j].TieuDe">@baiBao[j].TieuDe</a>
+                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[j].IdBaiBao" asp-route-name="@baiBao[j].TieuDe.ToUrlFriendly()">@baiBao[j].TieuDe</a>
                                     </h2>
                                     <ul class="entry__meta">
                                         <li class="entry__meta-author">

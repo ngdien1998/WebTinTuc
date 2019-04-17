@@ -4,6 +4,22 @@
         .Include(e => e.BaiBao)
         .ThenInclude(e => e.UsernameNavigation)
         .ToList();
+
+    var sidebarModel = Context.DanhMuc
+        .Include(e => e.BaiBao)
+        .ToList();
+
+    var footerModel = new FooterViewModel
+    {
+        DanhMuc = Context.DanhMuc
+        .Take(5)
+        .ToList(),
+        
+        BaiBao = Context.BaiBao
+        .Include(e => e.UsernameNavigation)
+        .Take(2)
+        .ToList()
+    };
 }
 
 <!DOCTYPE html>
@@ -50,7 +66,7 @@
 
     <!-- Sidenav -->
     <header class="sidenav" id="sidenav">
-        <partial name="~/Views/Shared/_SidebarPartial.cshtml" />
+        <partial name="~/Views/Shared/_SidebarPartial.cshtml" model="sidebarModel" />
     </header>
     <!-- end sidenav -->
 
@@ -66,7 +82,7 @@
     <!-- end main-wrapper -->
     <!-- Footer -->
     <footer class="footer footer--dark">
-        <partial name="~/Views/Shared/_FooterPartial.cshtml" />
+        <partial name="~/Views/Shared/_FooterPartial.cshtml" model="footerModel" />
     </footer>
     <!-- end footer -->
 

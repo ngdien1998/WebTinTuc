@@ -1,0 +1,56 @@
+﻿@model DanhMuc
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutPostDetail.cshtml";
+    ViewData["DanhMuc"] = Model;
+}
+
+<h1 class="page-title">@Model.TenDanhMuc</h1>
+
+<div class="row card-row">
+    @foreach (var baiBao in Model.BaiBao.Take(6))
+    {
+        <div class="col-md-6">
+            <article class="entry card">
+                <div class="entry__img-holder card__img-holder">
+                    <a href="single-post.html">
+                        <div class="thumb-container thumb-70">
+                            <img data-src="@baiBao.HinhAnh" src="@baiBao.HinhAnh" class="entry__img lazyloaded" alt="">
+                        </div>
+                    </a>
+                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                       asp-action="Index"
+                       asp-controller="Category"
+                       asp-route-id="@baiBao.IdDanhMuc"
+                       asp-route-name="@baiBao.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                        @Model.TenDanhMuc
+                    </a>
+                </div>
+
+                <div class="entry__body card__body">
+                    <div class="entry__header">
+                        <h2 class="entry__title">
+                            <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()">@baiBao.TieuDe</a>
+                        </h2>
+                        <ul class="entry__meta">
+                            <li class="entry__meta-author">
+                                <span>by</span>
+                                <a href="javascript:void(0)">@baiBao.UsernameNavigation.HoTen</a>
+                            </li>
+                            <li class="entry__meta-date">
+                                @baiBao.ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="entry__excerpt">
+                        <p>
+                            @(baiBao.TomTat.Length < 70
+                                ? baiBao.TomTat
+                                : new string(baiBao.TomTat.Take(70).ToArray()) + " ...")
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    }
+</div>

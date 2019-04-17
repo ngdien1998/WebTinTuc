@@ -10,7 +10,7 @@
         @foreach (var baiBao in Model)
         {
             <li class="newsticker__item">
-                <a class="newsticker__item-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe">@baiBao.TieuDe</a>
+                <a class="newsticker__item-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()">@baiBao.TieuDe</a>
             </li>
         }
     </ul>

@@ -4,7 +4,12 @@
     @foreach (var danhMuc in Model)
     {
         <li>
-            <a href="#">@danhMuc.TenDanhMuc <span class="categories-count">@danhMuc.BaiBao.Count()</span></a>
+            <a asp-action="Index"
+               asp-controller="Category"
+               asp-route-id="@danhMuc.IdDanhMuc"
+               asp-route-name="@danhMuc.TenDanhMuc.ToUrlFriendly()">
+                @danhMuc.TenDanhMuc <span class="categories-count">@danhMuc.BaiBao.Count()</span>
+            </a>
         </li>
     }
 </ul>

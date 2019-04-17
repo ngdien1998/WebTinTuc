@@ -1,0 +1,222 @@
+﻿@inject TinTucContext Context
+@{
+    var danhMuc = Context.DanhMuc
+        .Include(e => e.BaiBao)
+        .ThenInclude(e => e.UsernameNavigation)
+        .ToList();
+
+    var popularPost = Context.BaiBao
+        .Include(e => e.UsernameNavigation)
+        .OrderByDescending(e => e.ThoiGianTao)
+        .OrderBy(e => e.LuotXem)
+        .Take(5);
+
+    var sidebarModel = Context.DanhMuc
+        .Include(e => e.BaiBao)
+        .ToList();
+
+    var footerModel = new FooterViewModel
+    {
+        DanhMuc = Context.DanhMuc
+        .Take(5)
+        .ToList(),
+
+        BaiBao = Context.BaiBao
+        .Include(e => e.UsernameNavigation)
+        .Take(2)
+        .ToList()
+    };
+
+    object flagModel = null;
+    if (ViewData.ContainsKey("TinTuc"))
+    {
+        flagModel = ViewData["TinTuc"];
+    }
+    else if (ViewData.ContainsKey("DanhMuc"))
+    {
+        flagModel = ViewData["DanhMuc"];
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tin tức - @ViewData["Title"]</title>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />
+    <meta content="" name="description">
+
+    <script src="~/js/jquery-3.4.0.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="~/css/font-icons.css" rel="stylesheet">
+
+    <!-- Css -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/font-icons.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.ico" rel="shortcut icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="~/img/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
+    <link href="~/img/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+
+    @RenderSection("Styles", required: false)
+
+    <!-- Lazyload (must be placed in head in order to work) -->
+    <script src="~/js/lazysizes.min.js"></script>
+</head>
+
+<body class="bg-light style-default style-rounded">
+    <!-- Preloader -->
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Bg Overlay -->
+    <div class="content-overlay"></div>
+
+    <!-- Sidenav -->
+    <header class="sidenav" id="sidenav">
+        <partial name="~/Views/Shared/_SidebarPartial.cshtml" model="sidebarModel" />
+    </header>
+    <!-- end sidenav -->
+
+    <main class="main oh" id="main">
+        <!-- Navigation -->
+        <header class="nav">
+            <partial name="~/Views/Shared/_NavbarPartial.cshtml" model="danhMuc" />
+        </header>
+        <!-- end navigation -->
+        <!-- Breadcrumbs -->
+        <div class="container">
+            <ul class="breadcrumbs">
+                <li class="breadcrumbs__item">
+                    <a class="breadcrumbs__url" asp-action="Index" asp-controller="Home">Trang chủ</a>
+                </li>
+                @if (flagModel is DanhMuc dm)
+                {
+                    <li class="breadcrumbs__item breadcrumbs__item--current">
+                        @dm.TenDanhMuc
+                    </li>
+                }
+                else if (flagModel is BaiBao bb)
+                {
+                    <li class="breadcrumbs__item">
+                        <a class="breadcrumbs__url" 
+                           asp-action="Index" 
+                           asp-controller="Category" 
+                           asp-route-id="@bb.IdDanhMuc" 
+                           asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                            @bb.IdDanhMucNavigation.TenDanhMuc
+                        </a>
+                    </li>
+                    <li class="breadcrumbs__item breadcrumbs__item--current">
+                        @bb.TieuDe
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- end Breadcrumbs -->
+
+        <div class="main-container container" id="main-container">
+            <!-- Content -->
+            <div class="row">
+                <!-- post content -->
+                <div class="col-lg-8 blog__content mb-72">
+                    @RenderBody()
+                </div>
+                <!-- end post content -->
+                <!-- Sidebar -->
+                <aside class="col-lg-4 sidebar sidebar--right">
+                    <!-- Widget Popular Posts -->
+                    <aside class="widget widget-popular-posts">
+                        <h4 class="widget-title">Popular Posts</h4>
+                        <ul class="post-list-small">
+                            @foreach (var baiBao in popularPost)
+                            {
+                                <li class="post-list-small__item">
+                                    <article class="post-list-small__entry clearfix">
+                                        <div class="post-list-small__img-holder">
+                                            <div class="thumb-container thumb-100">
+                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()">
+                                                    <img alt="" class="post-list-small__img--rounded lazyload" data-src="@baiBao.HinhAnh" src="@baiBao.HinhAnh">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="post-list-small__body">
+                                            <h3 class="post-list-small__entry-title">
+                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()">
+                                                    @baiBao.TieuDe
+                                                </a>
+                                            </h3>
+                                            <ul class="entry__meta">
+                                                <li class="entry__meta-author">
+                                                    <span>by</span>
+                                                    <a href="javascript:void(0)">@baiBao.UsernameNavigation.HoTen</a>
+                                                </li>
+                                                <li class="entry__meta-date">
+                                                    @baiBao.ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </article>
+                                </li>
+                            }
+                        </ul>
+                    </aside>
+                    <!-- end widget popular posts -->
+                    <!-- Widget Newsletter -->
+                    <aside class="widget widget_mc4wp_form_widget">
+                        <h4 class="widget-title">Newsletter</h4>
+                        <p class="newsletter__text">
+                            <i class="ui-email newsletter__icon"></i>
+                            Đăng ký nhận tin tức hằng ngày
+                        </p>
+                        <form class="mc4wp-form" method="post">
+                            <div class="mc4wp-form-fields">
+                                <div class="form-group">
+                                    <input name="EMAIL" placeholder="Email của bạn" required="" type="email">
+                                </div>
+                                <div class="form-group">
+                                    <input class="btn btn-lg btn-color" type="submit" value="Đăng ký">
+                                </div>
+                            </div>
+                        </form>
+                    </aside>
+                    <!-- end widget newsletter -->
+                </aside>
+                <!-- end sidebar -->
+            </div>
+            <!-- end content -->
+        </div>
+        <!-- end main container -->
+    </main>
+    <!-- end main-wrapper -->
+    <!-- Footer -->
+    <footer class="footer footer--dark">
+        <partial name="~/Views/Shared/_FooterPartial.cshtml" model="footerModel" />
+    </footer>
+    <!-- end footer -->
+
+    <div id="back-to-top">
+        <a aria-label="Go to top" href="#top"><i class="ui-arrow-up"></i></a>
+    </div>
+
+    <!-- jQuery Scripts -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/easing.min.js"></script>
+    <script src="~/js/owl-carousel.min.js"></script>
+    <script src="~/js/flickity.pkgd.min.js"></script>
+    <script src="~/js/twitterFetcher_min.js"></script>
+    <script src="~/js/jquery.newsTicker.min.js"></script>
+    <script src="~/js/modernizr.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

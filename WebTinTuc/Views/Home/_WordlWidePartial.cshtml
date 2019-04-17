@@ -4,16 +4,21 @@
 {
     <article class="entry card post-list">
         <div class="entry__img-holder post-list__img-holder card__img-holder" style="background-image: url('@baiBao.HinhAnh')">
-            <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe"></a>
+            <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()"></a>
             <img alt="" class="entry__img d-none"
                  src="@baiBao.HinhAnh">
             <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--blue"
-               href="#">@baiBao.IdDanhMucNavigation.TenDanhMuc</a>
+               asp-action="Index"
+               asp-controller="Category"
+               asp-route-id="@baiBao.IdDanhMuc"
+               asp-route-name="@baiBao.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                @baiBao.IdDanhMucNavigation.TenDanhMuc
+            </a>
         </div>
         <div class="entry__body post-list__body card__body">
             <div class="entry__header">
                 <h2 class="entry__title">
-                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe">
+                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()">
                         @baiBao.TieuDe
                     </a>
                 </h2>
@@ -29,7 +34,9 @@
             </div>
             <div class="entry__excerpt">
                 <p>
-                    @(new string(baiBao.TomTat.Take(70).ToArray()) + " ...")
+                    @(baiBao.TomTat.Length < 70
+                        ? baiBao.TomTat
+                        : new string(baiBao.TomTat.Take(70).ToArray()) + " ...")
                 </p>
             </div>
         </div>

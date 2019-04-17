@@ -8,7 +8,13 @@
                 <a asp-action="Index" asp-controller="Post" asp-route-id="@Model[0].IdBaiBao" asp-route-name="@Model[0].TieuDe.ToUrlFriendly()">
                     <img alt="" class="entry__img" src="@Model[0].HinhAnh">
                 </a>
-                <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--green" href="#">@Model[0].IdDanhMucNavigation.TenDanhMuc</a>
+                <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--green"
+                   asp-action="Index"
+                   asp-controller="Category"
+                   asp-route-id="@Model[0].IdDanhMuc"
+                   asp-route-name="@Model[0].IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                    @Model[0].IdDanhMucNavigation.TenDanhMuc
+                </a>
             </div>
 
             <div class="entry__body card__body">
@@ -38,7 +44,13 @@
                     <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@Model[i].IdBaiBao" asp-route-name="@Model[i].TieuDe.ToUrlFriendly()">
                         <img alt="" class="entry__img" src="@Model[i].HinhAnh">
                     </a>
-                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet" href="#">@Model[i].IdDanhMucNavigation.TenDanhMuc</a>
+                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                       asp-action="Index"
+                       asp-controller="Category"
+                       asp-route-id="@Model[i].IdDanhMuc"
+                       asp-route-name="@Model[i].IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                        @Model[i].IdDanhMucNavigation.TenDanhMuc
+                    </a>
                 </div>
 
                 <div class="entry__body post-list__body card__body">

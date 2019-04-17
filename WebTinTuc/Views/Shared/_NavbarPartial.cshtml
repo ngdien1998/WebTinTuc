@@ -30,7 +30,12 @@
                                                         <a href="single-post.html">
                                                             <img alt="" class="entry__img" src="@bb.HinhAnh">
                                                         </a>
-                                                        <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet" href="#">@Model[0].TenDanhMuc</a>
+                                                        <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet" asp-action="Index"
+                                                           asp-controller="Category"
+                                                           asp-route-id="@bb.IdDanhMuc"
+                                                           asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                                                            @Model[0].TenDanhMuc
+                                                        </a>
                                                     </div>
 
                                                     <div class="entry__body">
@@ -72,7 +77,7 @@
 
                                                         <div class="entry__body">
                                                             <h2 class="entry__title">
-                                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe">@bb.TieuDe</a>
+                                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">@bb.TieuDe</a>
                                                             </h2>
                                                         </div>
                                                     </article>
@@ -85,11 +90,10 @@
                             <!-- end megamenu -->
                         </li>
                     }
-                </ul> 
+                </ul>
                 <!-- end menu -->
-            </nav> 
+            </nav>
             <!-- end nav-wrap -->
-
             <!-- Nav Right -->
             <div class="nav__right">
                 <!-- Search -->
@@ -106,10 +110,10 @@
                         </form>
                     </div>
                 </div>
-            </div> 
+            </div>
             <!-- end nav right -->
-        </div> 
+        </div>
         <!-- end flex-parent -->
-    </div> 
+    </div>
     <!-- end container -->
 </div>

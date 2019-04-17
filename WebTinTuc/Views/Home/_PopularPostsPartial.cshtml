@@ -16,7 +16,7 @@
                 </div>
                 <div class="post-list-small__body">
                     <h3 class="post-list-small__entry-title">
-                        <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe">
+                        <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()">
                             @baiBao.TieuDe
                         </a>
                     </h3>
