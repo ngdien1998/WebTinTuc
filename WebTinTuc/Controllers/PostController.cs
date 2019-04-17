@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using WebTinTuc.Models.Entities;
+using WebTinTuc.Models.Services;
 
 namespace WebTinTuc.Controllers
 {
@@ -36,6 +38,19 @@ namespace WebTinTuc.Controllers
                 return NotFound();
             }
             return View(baiBao);
+        }
+
+        [HttpPost]
+        public IActionResult Comment(BinhLuan binhLuan)
+        {
+            if (ModelState.IsValid)
+            {
+                binhLuan.ThoiGian = DateTime.Now;
+                context.BinhLuan.Add(binhLuan);
+                context.SaveChanges();
+            }
+            var baiBao = context.BaiBao.Find(binhLuan.IdBaiBao);
+            return RedirectToAction(nameof(Index), new { id = binhLuan.IdBaiBao, name = baiBao?.TieuDe.ToUrlFriendly() });
         }
     }
 }

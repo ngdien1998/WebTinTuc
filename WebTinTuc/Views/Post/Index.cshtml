@@ -12,7 +12,12 @@
     <article class="entry mb-0">
         <div class="single-post__entry-header entry__header">
             <a class="entry__meta-category entry__meta-category--label entry__meta-category--green"
-               href="categories.html">@Model.IdDanhMucNavigation.TenDanhMuc</a>
+               asp-action="Index"
+               asp-controller="Category"
+               asp-route-id="@Model.IdDanhMuc"
+               asp-route-name="@Model.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                @Model.IdDanhMucNavigation.TenDanhMuc
+            </a>
             <h1 class="single-post__entry-title">
                 @Model.TieuDe
             </h1>
@@ -21,7 +26,7 @@
                 <ul class="entry__meta">
                     <li class="entry__meta-author">
                         <span>by</span>
-                        <a href="#">@Model.UsernameNavigation.HoTen</a>
+                        <a href="javascript:void(0)">@Model.UsernameNavigation.HoTen</a>
                     </li>
                     <li class="entry__meta-date">
                         @Model.ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
@@ -34,7 +39,7 @@
                         <span>@Model.LuotXem</span>
                     </li>
                     <li class="entry__meta-comments">
-                        <a href="#">
+                        <a href="javascript:void(0)">
                             <i class="ui-chat-empty"></i>@Model.BinhLuan.Count()
                         </a>
                     </li>
@@ -123,7 +128,6 @@
             </div>
         </div>
         <!-- end newsletter wide -->
-
         <!-- Related Posts -->
         <section class="section related-posts mt-40 mb-0">
             <div class="title-wrap title-wrap--line title-wrap--pr">
@@ -166,7 +170,7 @@
                 <li>
                     <div class="comment-body">
                         <div class="comment-avatar">
-                            <img src="~/img/comment-avatar.jpg" alt="comment avatar" />
+                            <img src="~/img/comment-avatar.jpg" alt="comment avatar" style="width:50px;height:50px;" />
                         </div>
                         <div class="comment-text">
                             <h6 class="comment-author">@binhLuan.TenNguoiBl</h6>
@@ -189,20 +193,21 @@
             <h5 class="comment-respond__title section-title">Để lại bình luận của bạn về bài viết</h5>
         </div>
 
-        <form action="#" class="comment-form" id="form" method="post">
+        <form asp-action="Comment" class="comment-form" id="form" method="post">
+            <input type="hidden" name="IdBaiBao" value="@Model.IdBaiBao" />
             <p class="comment-form-comment">
                 <label for="comment">Nội dung</label>
-                <textarea id="comment" name="comment" required="required" rows="5"></textarea>
+                <textarea id="comment" name="NoiDung" required="required" rows="5"></textarea>
             </p>
 
             <div class="row row-20">
                 <div class="col-lg-4">
                     <label for="name">Tên: *</label>
-                    <input id="name" name="name" type="text">
+                    <input id="name" name="TenNguoiBl" type="text">
                 </div>
                 <div class="col-lg-4">
                     <label for="email">Email: *</label>
-                    <input id="email" name="email" type="email">
+                    <input id="email" name="Email" type="email">
                 </div>
                 <div class="col-lg-4">
                     <label for="dien-thoai">Điện thoại:</label>

@@ -10,14 +10,23 @@
                 </span>
             </button>
 
+            <a asp-action="Index" asp-controller="Home" class="logo">
+                <h3 style="margin:0;">DTP NEWS</h3>
+            </a>
+
             <!-- Nav-wrap -->
             <nav class="flex-child nav__wrap d-none d-lg-block">
                 <ul class="nav__menu">
                     <li class="nav__dropdown active">
-                        <a href="#">@Model[0].TenDanhMuc</a>
                         @{
                             var baiBao = Model[0].BaiBao.Take(4).ToArray();
                         }
+                        <a asp-action="Index"
+                           asp-controller="Category"
+                           asp-route-id="@Model[0].IdDanhMuc"
+                           asp-route-name="@Model[0].TenDanhMuc.ToUrlFriendly()">
+                            @Model[0].TenDanhMuc
+                        </a>
                         <ul class="nav__dropdown-menu nav__megamenu" style="width:1050px;left:-50%;">
                             <li>
                                 <div class="nav__megamenu-wrap">
@@ -27,10 +36,11 @@
                                             <div class="col nav__megamenu-item">
                                                 <article class="entry">
                                                     <div class="entry__img-holder">
-                                                        <a href="single-post.html">
+                                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">
                                                             <img alt="" class="entry__img" src="@bb.HinhAnh">
                                                         </a>
-                                                        <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet" asp-action="Index"
+                                                        <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                                                           asp-action="Index"
                                                            asp-controller="Category"
                                                            asp-route-id="@bb.IdDanhMuc"
                                                            asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
@@ -53,13 +63,18 @@
                         <!-- end megamenu -->
                     </li>
 
-                    @for (int i = 1; i < 9; i++)
+                    @for (int i = 1; i < 8; i++)
                     {
                         <li class="nav__dropdown">
-                            <a href="#">@Model[i].TenDanhMuc</a>
                             @{
                                 baiBao = Model[i].BaiBao.Take(4).ToArray();
                             }
+                            <a asp-action="Index"
+                               asp-controller="Category"
+                               asp-route-id="@Model[i].IdDanhMuc"
+                               asp-route-name="@Model[i].TenDanhMuc.ToUrlFriendly()">
+                                @Model[i].TenDanhMuc
+                            </a>
                             <ul class="nav__dropdown-menu nav__megamenu" style="width:1050px;left:-50%;">
                                 <li>
                                     <div class="nav__megamenu-wrap">
@@ -69,10 +84,16 @@
                                                 <div class="col nav__megamenu-item">
                                                     <article class="entry">
                                                         <div class="entry__img-holder">
-                                                            <a href="single-post.html">
+                                                            <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">
                                                                 <img alt="" class="entry__img" src="@bb.HinhAnh">
                                                             </a>
-                                                            <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet" href="#">@Model[i].TenDanhMuc</a>
+                                                            <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                                                               asp-action="Index"
+                                                               asp-controller="Category"
+                                                               asp-route-id="@bb.IdDanhMuc"
+                                                               asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                                                                @Model[i].TenDanhMuc
+                                                            </a>
                                                         </div>
 
                                                         <div class="entry__body">
