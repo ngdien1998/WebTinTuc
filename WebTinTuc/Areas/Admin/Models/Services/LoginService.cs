@@ -18,7 +18,7 @@ namespace WebTinTuc.Areas.Admin.Models.Services
 
         public bool AllowToLogin(AdminUserViewModel admin)
         {
-            var entity = context.QuanTriVien.Where(e => 
+            var entity = context.QuanTriVien.FirstOrDefault(e => 
                 e.Username == admin.Username && admin.MatKhau == e.MatKhau);
             return entity != null;
         }

@@ -1,14 +1,17 @@
 ﻿@model DanhMuc
 @{
-    ViewData["Title"] = Model.TenDanhMuc;
     Layout = "~/Views/Shared/_LayoutPostDetail.cshtml";
+    ViewData["Title"] = Model.TenDanhMuc;
     ViewData["DanhMuc"] = Model;
+    var dmBaiBao = Model.BaiBao
+        .OrderByDescending(e => e.IdBaiBao)
+        .Take(6);
 }
 
 <h1 class="page-title">@Model.TenDanhMuc</h1>
 
 <div class="row card-row">
-    @foreach (var baiBao in Model.BaiBao.Take(6))
+    @foreach (var baiBao in dmBaiBao)
     {
         <div class="col-md-6">
             <article class="entry card">

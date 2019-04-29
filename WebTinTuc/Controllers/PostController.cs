@@ -52,5 +52,25 @@ namespace WebTinTuc.Controllers
             var baiBao = context.BaiBao.Find(binhLuan.IdBaiBao);
             return RedirectToAction(nameof(Index), new { id = binhLuan.IdBaiBao, name = baiBao?.TieuDe.ToUrlFriendly() });
         }
+
+        [HttpPost("{id}")]
+        public IActionResult CountViews([FromRoute(Name = "id")] long? idBaiBao)
+        {
+            if (idBaiBao == null)
+            {
+                return BadRequest();
+            }
+
+            var baiBao = context.BaiBao.Find(idBaiBao);
+            if (baiBao == null)
+            {
+                return NotFound();
+            }
+
+            baiBao.LuotXem = (baiBao.LuotXem ?? 0) + 1;
+            context.SaveChanges();
+
+            return Content(baiBao.LuotXem.ToString());
+        }
     }
 }

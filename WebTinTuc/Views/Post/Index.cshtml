@@ -7,6 +7,24 @@
     var tags = Model.Tags?.Split(new[] { " ", ", " }, StringSplitOptions.RemoveEmptyEntries);
 }
 
+@section Styles {
+    <style>
+        #tom-tat {
+            margin-top: 32px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        setTimeout(() => {
+            $.post("@Url.Action("CountViews", "Post", new { id = Model.IdBaiBao })", data => {
+                $("#luot-xem").html(data);
+            });
+        }, 60 * 1000);
+    </script>
+}
+
 <div class="content-box">
     <!-- standard post -->
     <article class="entry mb-0">
@@ -36,7 +54,7 @@
                 <ul class="entry__meta">
                     <li class="entry__meta-views">
                         <i class="ui-eye"></i>
-                        <span>@Model.LuotXem</span>
+                        <span id="luot-xem">@(Model.LuotXem ?? 0)</span>
                     </li>
                     <li class="entry__meta-comments">
                         <a href="javascript:void(0)">
@@ -50,6 +68,10 @@
 
         <div class="entry__img-holder">
             <img alt="" class="entry__img" src="@Model.HinhAnh">
+
+            <div id="tom-tat">
+                <h5>@Model.TomTat</h5>
+            </div>
         </div>
 
         <div class="entry__article-wrap">
@@ -74,11 +96,10 @@
             </div>
             <!-- end Share -->
 
-
             <div class="entry__article">
                 @Html.Raw(Model.NoiDung)
                 <script>
-                    let p = $(".Normal");
+                    let p = $(".entry__article p");
                     let len = p.length;
                     for (let i = 0; i < len; i++) {
                         $(p[i]).removeAttr("style");

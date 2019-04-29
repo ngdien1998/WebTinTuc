@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using WebTinTuc.Models.Entities;
+using System.Linq;
 
 namespace WebTinTuc.Areas.Admin.Models.Services
 {
@@ -21,6 +22,11 @@ namespace WebTinTuc.Areas.Admin.Models.Services
 
         public void Delete(BaiBao entity)
         {
+            var dsBinhLuan = context.BinhLuan.Where(e => e.IdBaiBao == entity.IdBaiBao);
+            foreach (var binhLuan in dsBinhLuan)
+            {
+                context.BinhLuan.Remove(binhLuan);
+            }
             context.BaiBao.Remove(entity);
             context.SaveChanges();
         }
@@ -29,10 +35,7 @@ namespace WebTinTuc.Areas.Admin.Models.Services
         {
             return context.BaiBao
                 .Include(e => e.UsernameNavigation)
-                .Include(e => e.IdDanhMucNavigation)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(e => e.IdBaiBao == (long)id)
-                .Result;
+                .FirstOrDefault(e => e.IdBaiBao == (long)id);
         }
 
         public IEnumerable<BaiBao> GetAll()

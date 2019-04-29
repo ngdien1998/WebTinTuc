@@ -1,6 +1,8 @@
 ﻿@model DanhMuc
 @{ 
-    var baiBao = Model.BaiBao.ToArray();
+    var baiBao = Model.BaiBao
+        .OrderByDescending(e => e.IdBaiBao)
+        .ToArray();
 }
 
 <div class="col-md-6">

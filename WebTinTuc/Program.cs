@@ -19,6 +19,8 @@ namespace WebTinTuc
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .UseKestrel()
+            .UseIISIntegration()
+            .UseStartup<Startup>();
     }
 }

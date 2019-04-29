@@ -1,6 +1,6 @@
 ﻿@model HomeViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Trang chủ";
 }
 
 <!-- Trending Now -->
@@ -19,7 +19,6 @@
     </div>
 </section>
 <!-- end featured posts grid -->
-
 <!-- Main container -->
 <div class="main-container container pt-24" id="main-container">
     <!-- Content -->
@@ -33,7 +32,6 @@
             <!-- end latest news -->
         </div>
         <!-- end posts -->
-
         <!-- Sidebar -->
         <aside class="col-lg-4 sidebar sidebar--right">
             <!-- Widget Popular Posts -->
@@ -41,30 +39,28 @@
                 <partial name="~/Views/Home/_PopularPostsPartial.cshtml" model="Model.PopularPosts" />
             </aside>
             <!-- end widget popular posts -->
-
             <!-- Widget Newsletter -->
             <aside class="widget widget_mc4wp_form_widget">
                 <h4 class="widget-title">Newsletter</h4>
                 <p class="newsletter__text">
                     <i class="ui-email newsletter__icon"></i>
-                    Subscribe for our daily news
+                    Đăng ký nhận tin hằng ngày
                 </p>
                 <form class="mc4wp-form" method="post">
                     <div class="mc4wp-form-fields">
                         <div class="form-group">
-                            <input name="EMAIL" placeholder="Your email" required="" type="email">
+                            <input name="EMAIL" placeholder="Email của bạn" required="" type="email">
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-lg btn-color" type="submit" value="Sign Up">
+                            <input class="btn btn-lg btn-color" type="submit" value="Đăng ký">
                         </div>
                     </div>
                 </form>
             </aside>
             <!-- end widget newsletter -->
-
             <!-- Widget Socials -->
             <aside class="widget widget-socials">
-                <h4 class="widget-title">Let's hang out on social</h4>
+                <h4 class="widget-title">Theo dỏi trang trên các mạng xã hội</h4>
                 <div class="socials socials--wide socials--large">
                     <div class="row row-16">
                         <div class="col">
@@ -107,11 +103,10 @@
         <!-- end sidebar -->
     </div>
     <!-- end content -->
-
     <!-- Carousel posts -->
     <section class="section mb-0">
         <div class="title-wrap title-wrap--line title-wrap--pr">
-            <h3 class="section-title">editors picks</h3>
+            <h3 class="section-title">Tin nóng</h3>
         </div>
 
         <!-- Slider -->
@@ -121,7 +116,6 @@
         <!-- end slider -->
     </section>
     <!-- end carousel posts -->
-
     <!-- Posts from categories -->
     <section class="section mb-0">
         <div class="row">
@@ -132,7 +126,6 @@
         </div>
     </section>
     <!-- end posts from categories -->
-
     <!-- Content Secondary -->
     <div class="row">
         <!-- Posts -->
@@ -140,8 +133,11 @@
             <!-- Worldwide News -->
             <section class="section">
                 <div class="title-wrap title-wrap--line">
-                    <h3 class="section-title">Worldwide</h3>
-                    <a class="all-posts-url" href="#">View All</a>
+                    <h3 class="section-title">Đời sống</h3>
+                    <a class="all-posts-url" asp-action="Index"
+                       asp-controller="Category"
+                       asp-route-id="10"
+                       asp-route-name="doi-song">View All</a>
                 </div>
 
                 <partial name="~/Views/Home/_WordlWidePartial.cshtml" model="@Model.RandomCategory" />
@@ -149,7 +145,6 @@
             <!-- end worldwide news -->
         </div>
         <!-- end posts -->
-
         <!-- Sidebar 1 -->
         <aside class="col-lg-4 sidebar sidebar--1 sidebar--right">
             <!-- Widget Categories -->

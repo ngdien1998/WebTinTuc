@@ -12,10 +12,14 @@
         @foreach (var danhMuc in Model)
         {
             <li>
-                <a href="#" class="sidenav__menu-url">@danhMuc.TenDanhMuc</a>
+                <a asp-action="Index"
+                   asp-controller="Category"
+                   asp-route-id="@danhMuc.IdDanhMuc"
+                   asp-route-name="@danhMuc.TenDanhMuc.ToUrlFriendly()"
+                   class="sidenav__menu-url">@danhMuc.TenDanhMuc</a>
                 <button class="sidenav__menu-toggle" aria-haspopup="true" aria-label="Open dropdown"><i class="ui-arrow-down"></i></button>
                 <ul class="sidenav__menu-dropdown" style="display: none;">
-                    @foreach (var baiBao in danhMuc.BaiBao.Take(4))
+                    @foreach (var baiBao in danhMuc.BaiBao.OrderByDescending(e => e.IdBaiBao).Take(4))
                     {
                         <li>
                             <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao.IdBaiBao" asp-route-name="@baiBao.TieuDe.ToUrlFriendly()" class="sidenav__menu-url">@baiBao.TieuDe</a>

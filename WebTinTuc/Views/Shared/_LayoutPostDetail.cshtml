@@ -7,8 +7,7 @@
 
     var popularPost = Context.BaiBao
         .Include(e => e.UsernameNavigation)
-        .OrderByDescending(e => e.ThoiGianTao)
-        .OrderBy(e => e.LuotXem)
+        .OrderByDescending(e => e.IdBaiBao)
         .Take(5);
 
     var sidebarModel = Context.DanhMuc
@@ -22,6 +21,7 @@
         .ToList(),
 
         BaiBao = Context.BaiBao
+        .OrderByDescending(e => e.IdBaiBao)
         .Include(e => e.UsernameNavigation)
         .Take(2)
         .ToList()

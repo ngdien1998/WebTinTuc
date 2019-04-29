@@ -16,6 +16,7 @@
         .ToList(),
         
         BaiBao = Context.BaiBao
+        .OrderByDescending(e => e.IdBaiBao)
         .Include(e => e.UsernameNavigation)
         .Take(2)
         .ToList()
@@ -25,7 +26,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Tin tức - @ViewData["Title"]</title>
+    <title>Tin tức DTP - @ViewData["Title"]</title>
 
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport" />

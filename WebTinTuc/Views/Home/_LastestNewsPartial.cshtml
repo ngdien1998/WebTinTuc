@@ -1,12 +1,7 @@
 ﻿@model List<DanhMuc>
 
-<script>
-    function changeTab(id) {
-
-    }
-</script>
 <div class="title-wrap title-wrap--line">
-    <h3 class="section-title">Latest News</h3>
+    <h3 class="section-title">Tin mới nhất</h3>
 
     <div class="tabs tab-post__tabs">
         <ul class="tabs__list">
@@ -28,7 +23,10 @@
 <div class="tabs__content tabs__content-trigger tab-post__tabs-content">
     @{
         var danhMuc = Model[0];
-        var baiBao = danhMuc.BaiBao.Take(4).ToArray();
+        var baiBao = danhMuc.BaiBao
+            .OrderByDescending(e => e.IdBaiBao)
+            .Take(4)
+            .ToArray();
     }
     <div class="tabs__content-pane tabs__content-pane--active" id="@(danhMuc.IdDanhMuc + "dm")">
         <div class="row card-row">
@@ -81,7 +79,10 @@
     @for (int i = 1; i < Model.Count; i++)
     {
         danhMuc = Model[i];
-        baiBao = danhMuc.BaiBao.Take(4).ToArray();
+        baiBao = danhMuc.BaiBao
+            .OrderByDescending(e => e.IdBaiBao)
+            .Take(4)
+            .ToArray();
         <div class="tabs__content-pane" id="@(danhMuc.IdDanhMuc + "dm")">
             <div class="row card-row">
                 @for (int j = 0; j < baiBao.Length; j++)

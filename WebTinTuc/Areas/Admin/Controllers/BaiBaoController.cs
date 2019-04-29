@@ -79,7 +79,7 @@ namespace WebTinTuc.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            entity.HinhAnh = $"<img src=\"{entity.HinhAnh}\" alt=\"\" />";
             ViewBag.DanhMuc = danhMucRepository.GetAll();
             return View(entity);
         }
