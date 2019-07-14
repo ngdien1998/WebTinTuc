@@ -1,74 +1,77 @@
 ﻿@model List<BaiBao>
 
-<div class="col-lg-6">
-    <!-- Large post -->
-    <div class="featured-posts-grid__item featured-posts-grid__item--lg">
-        <article class="entry card featured-posts-grid__entry">
-            <div class="entry__img-holder card__img-holder">
-                <a asp-action="Index" asp-controller="Post" asp-route-id="@Model[0].IdBaiBao" asp-route-name="@Model[0].TieuDe.ToUrlFriendly()">
-                    <img alt="" class="entry__img" src="@Model[0].HinhAnh">
-                </a>
-                <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--green"
-                   asp-action="Index"
-                   asp-controller="Category"
-                   asp-route-id="@Model[0].IdDanhMuc"
-                   asp-route-name="@Model[0].IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
-                    @Model[0].IdDanhMucNavigation.TenDanhMuc
-                </a>
-            </div>
-
-            <div class="entry__body card__body">
-                <h2 class="entry__title">
-                    <a asp-action="Index" asp-controller="Post" asp-route-id="@Model[0].IdBaiBao" asp-route-name="@Model[0].TieuDe.ToUrlFriendly()">@Model[0].TieuDe</a>
-                </h2>
-                <ul class="entry__meta">
-                    <li class="entry__meta-author">
-                        <span>by</span>
-                        <a href="#">@Model[0].UsernameNavigation.HoTen</a>
-                    </li>
-                    <li class="entry__meta-date">@Model[0].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")</li>
-                </ul>
-            </div>
-        </article>
-    </div>
-    <!-- end large post -->
-</div>
-
-<div class="col-lg-6">
-    @for (int i = 1; i < Model.Count; i++)
-    {
-        <!-- Small post -->
-        <div class="featured-posts-grid__item featured-posts-grid__item--sm">
-            <article class="entry card post-list featured-posts-grid__entry">
-                <div class="entry__img-holder post-list__img-holder card__img-holder">
-                    <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@Model[i].IdBaiBao" asp-route-name="@Model[i].TieuDe.ToUrlFriendly()">
-                        <img alt="" class="entry__img" src="@Model[i].HinhAnh">
+@if (Model != null && Model.Count > 0)
+{
+    <div class="col-lg-6">
+        <!-- Large post -->
+        <div class="featured-posts-grid__item featured-posts-grid__item--lg">
+            <article class="entry card featured-posts-grid__entry">
+                <div class="entry__img-holder card__img-holder">
+                    <a asp-action="Index" asp-controller="Post" asp-route-id="@Model[0].IdBaiBao" asp-route-name="@Model[0].TieuDe.ToUrlFriendly()">
+                        <img alt="" class="entry__img" src="@Model[0].HinhAnh">
                     </a>
-                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--green"
                        asp-action="Index"
                        asp-controller="Category"
-                       asp-route-id="@Model[i].IdDanhMuc"
-                       asp-route-name="@Model[i].IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
-                        @Model[i].IdDanhMucNavigation.TenDanhMuc
+                       asp-route-id="@Model[0].IdDanhMuc"
+                       asp-route-name="@Model[0].IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                        @Model[0].IdDanhMucNavigation.TenDanhMuc
                     </a>
                 </div>
 
-                <div class="entry__body post-list__body card__body">
+                <div class="entry__body card__body">
                     <h2 class="entry__title">
-                        <a asp-action="Index" asp-controller="Post" asp-route-id="@Model[i].IdBaiBao" asp-route-name="@Model[i].TieuDe.ToUrlFriendly()">@Model[i].TieuDe</a>
+                        <a asp-action="Index" asp-controller="Post" asp-route-id="@Model[0].IdBaiBao" asp-route-name="@Model[0].TieuDe.ToUrlFriendly()">@Model[0].TieuDe</a>
                     </h2>
                     <ul class="entry__meta">
                         <li class="entry__meta-author">
                             <span>by</span>
-                            <a href="#">@Model[i].UsernameNavigation.HoTen</a>
+                            <a href="#">@Model[0].UsernameNavigation.HoTen</a>
                         </li>
-                        <li class="entry__meta-date">
-                            @Model[i].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
-                        </li>
+                        <li class="entry__meta-date">@Model[0].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")</li>
                     </ul>
                 </div>
             </article>
         </div>
-        <!-- end post -->
-    }
-</div>
+        <!-- end large post -->
+    </div>
+
+    <div class="col-lg-6">
+        @for (int i = 1; i < Model.Count; i++)
+        {
+            <!-- Small post -->
+            <div class="featured-posts-grid__item featured-posts-grid__item--sm">
+                <article class="entry card post-list featured-posts-grid__entry">
+                    <div class="entry__img-holder post-list__img-holder card__img-holder">
+                        <a class="thumb-url" asp-action="Index" asp-controller="Post" asp-route-id="@Model[i].IdBaiBao" asp-route-name="@Model[i].TieuDe.ToUrlFriendly()">
+                            <img alt="" class="entry__img" src="@Model[i].HinhAnh">
+                        </a>
+                        <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                           asp-action="Index"
+                           asp-controller="Category"
+                           asp-route-id="@Model[i].IdDanhMuc"
+                           asp-route-name="@Model[i].IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                            @Model[i].IdDanhMucNavigation.TenDanhMuc
+                        </a>
+                    </div>
+
+                    <div class="entry__body post-list__body card__body">
+                        <h2 class="entry__title">
+                            <a asp-action="Index" asp-controller="Post" asp-route-id="@Model[i].IdBaiBao" asp-route-name="@Model[i].TieuDe.ToUrlFriendly()">@Model[i].TieuDe</a>
+                        </h2>
+                        <ul class="entry__meta">
+                            <li class="entry__meta-author">
+                                <span>by</span>
+                                <a href="#">@Model[i].UsernameNavigation.HoTen</a>
+                            </li>
+                            <li class="entry__meta-date">
+                                @Model[i].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+            <!-- end post -->
+        }
+    </div>
+}

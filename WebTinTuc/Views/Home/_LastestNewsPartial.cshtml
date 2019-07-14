@@ -1,98 +1,45 @@
 ﻿@model List<DanhMuc>
 
-<div class="title-wrap title-wrap--line">
-    <h3 class="section-title">Tin mới nhất</h3>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="title-wrap title-wrap--line">
+        <h3 class="section-title">Tin mới nhất</h3>
 
-    <div class="tabs tab-post__tabs">
-        <ul class="tabs__list">
-            <li class="tabs__item tabs__item--active">
-                <a class="tabs__trigger" href="#@(Model[0].IdDanhMuc + "dm")">@Model[0].TenDanhMuc</a>
-            </li>
-            @for (int i = 1; i < Model.Count; i++)
-            {
-                <li class="tabs__item">
-                    <a class="tabs__trigger" href="#@(Model[i].IdDanhMuc + "dm")">@Model[i].TenDanhMuc</a>
+        <div class="tabs tab-post__tabs">
+            <ul class="tabs__list">
+                <li class="tabs__item tabs__item--active">
+                    <a class="tabs__trigger" href="#@(Model[0].IdDanhMuc + "dm")">@Model[0].TenDanhMuc</a>
                 </li>
-            }
-        </ul>
-        <!-- end tabs -->
-    </div>
-</div>
-
-<!-- tab content -->
-<div class="tabs__content tabs__content-trigger tab-post__tabs-content">
-    @{
-        var danhMuc = Model[0];
-        var baiBao = danhMuc.BaiBao
-            .OrderByDescending(e => e.IdBaiBao)
-            .Take(4)
-            .ToArray();
-    }
-    <div class="tabs__content-pane tabs__content-pane--active" id="@(danhMuc.IdDanhMuc + "dm")">
-        <div class="row card-row">
-            @for (int i = 0; i < baiBao.Length; i++)
-            {
-                <div class="col-md-6">
-                    <article class="entry card">
-                        <div class="entry__img-holder card__img-holder">
-                            <a href="single-post.html">
-                                <div class="thumb-container thumb-70">
-                                    <img alt="" class="entry__img lazyload" data-src="@baiBao[i].HinhAnh" src="@baiBao[i].HinhAnh" />
-                                </div>
-                            </a>
-                            <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--orange"
-                               asp-action="Index"
-                               asp-controller="Category"
-                               asp-route-id="@danhMuc.IdDanhMuc"
-                               asp-route-name="@danhMuc.TenDanhMuc.ToUrlFriendly()">
-                                @danhMuc.TenDanhMuc
-                            </a>
-                        </div>
-
-                        <div class="entry__body card__body">
-                            <div class="entry__header">
-                                <h2 class="entry__title">
-                                    <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[i].IdBaiBao" asp-route-name="@baiBao[i].TieuDe.ToUrlFriendly()">@baiBao[i].TieuDe</a>
-                                </h2>
-                                <ul class="entry__meta">
-                                    <li class="entry__meta-author">
-                                        <span>by</span>
-                                        <a href="#">@baiBao[i].UsernameNavigation.HoTen</a>
-                                    </li>
-                                    <li class="entry__meta-date">
-                                        @baiBao[i].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="entry__excerpt">
-                                <p>
-                                    @(new string(baiBao[i].TomTat.Take(70).ToArray()) + " ...")
-                                </p>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            }
+                @for (int i = 1; i < Model.Count; i++)
+                {
+                    <li class="tabs__item">
+                        <a class="tabs__trigger" href="#@(Model[i].IdDanhMuc + "dm")">@Model[i].TenDanhMuc</a>
+                    </li>
+                }
+            </ul>
+            <!-- end tabs -->
         </div>
     </div>
 
-    @for (int i = 1; i < Model.Count; i++)
-    {
-        danhMuc = Model[i];
-        baiBao = danhMuc.BaiBao
-            .OrderByDescending(e => e.IdBaiBao)
-            .Take(4)
-            .ToArray();
-        <div class="tabs__content-pane" id="@(danhMuc.IdDanhMuc + "dm")">
+    <!-- tab content -->
+    <div class="tabs__content tabs__content-trigger tab-post__tabs-content">
+        @{
+            var danhMuc = Model[0];
+            var baiBao = danhMuc.BaiBao
+                .OrderByDescending(e => e.IdBaiBao)
+                .Take(4)
+                .ToArray();
+        }
+        <div class="tabs__content-pane tabs__content-pane--active" id="@(danhMuc.IdDanhMuc + "dm")">
             <div class="row card-row">
-                @for (int j = 0; j < baiBao.Length; j++)
+                @for (int i = 0; i < baiBao.Length; i++)
                 {
                     <div class="col-md-6">
                         <article class="entry card">
                             <div class="entry__img-holder card__img-holder">
                                 <a href="single-post.html">
                                     <div class="thumb-container thumb-70">
-                                        <img alt="" class="entry__img lazyload" data-src="@baiBao[j].HinhAnh" src="@baiBao[j].HinhAnh" />
+                                        <img alt="" class="entry__img lazyload" data-src="@baiBao[i].HinhAnh" src="@baiBao[i].HinhAnh" />
                                     </div>
                                 </a>
                                 <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--orange"
@@ -107,21 +54,21 @@
                             <div class="entry__body card__body">
                                 <div class="entry__header">
                                     <h2 class="entry__title">
-                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[j].IdBaiBao" asp-route-name="@baiBao[j].TieuDe.ToUrlFriendly()">@baiBao[j].TieuDe</a>
+                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[i].IdBaiBao" asp-route-name="@baiBao[i].TieuDe.ToUrlFriendly()">@baiBao[i].TieuDe</a>
                                     </h2>
                                     <ul class="entry__meta">
                                         <li class="entry__meta-author">
                                             <span>by</span>
-                                            <a href="#">@baiBao[j].UsernameNavigation.HoTen</a>
+                                            <a href="#">@baiBao[i].UsernameNavigation.HoTen</a>
                                         </li>
                                         <li class="entry__meta-date">
-                                            @baiBao[j].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
+                                            @baiBao[i].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="entry__excerpt">
                                     <p>
-                                        @(new string(baiBao[j].TomTat.Take(70).ToArray()) + " ...")
+                                        @(new string(baiBao[i].TomTat.Take(70).ToArray()) + " ...")
                                     </p>
                                 </div>
                             </div>
@@ -130,6 +77,62 @@
                 }
             </div>
         </div>
-    }
-</div>
-<!-- end tab content -->
+
+        @for (int i = 1; i < Model.Count; i++)
+        {
+            danhMuc = Model[i];
+            baiBao = danhMuc.BaiBao
+                .OrderByDescending(e => e.IdBaiBao)
+                .Take(4)
+                .ToArray();
+            <div class="tabs__content-pane" id="@(danhMuc.IdDanhMuc + "dm")">
+                <div class="row card-row">
+                    @for (int j = 0; j < baiBao.Length; j++)
+                    {
+                        <div class="col-md-6">
+                            <article class="entry card">
+                                <div class="entry__img-holder card__img-holder">
+                                    <a href="single-post.html">
+                                        <div class="thumb-container thumb-70">
+                                            <img alt="" class="entry__img lazyload" data-src="@baiBao[j].HinhAnh" src="@baiBao[j].HinhAnh" />
+                                        </div>
+                                    </a>
+                                    <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--orange"
+                                       asp-action="Index"
+                                       asp-controller="Category"
+                                       asp-route-id="@danhMuc.IdDanhMuc"
+                                       asp-route-name="@danhMuc.TenDanhMuc.ToUrlFriendly()">
+                                        @danhMuc.TenDanhMuc
+                                    </a>
+                                </div>
+
+                                <div class="entry__body card__body">
+                                    <div class="entry__header">
+                                        <h2 class="entry__title">
+                                            <a asp-action="Index" asp-controller="Post" asp-route-id="@baiBao[j].IdBaiBao" asp-route-name="@baiBao[j].TieuDe.ToUrlFriendly()">@baiBao[j].TieuDe</a>
+                                        </h2>
+                                        <ul class="entry__meta">
+                                            <li class="entry__meta-author">
+                                                <span>by</span>
+                                                <a href="#">@baiBao[j].UsernameNavigation.HoTen</a>
+                                            </li>
+                                            <li class="entry__meta-date">
+                                                @baiBao[j].ThoiGianTao.ToString("dd/MM/yyyy hh:mm")
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="entry__excerpt">
+                                        <p>
+                                            @(new string(baiBao[j].TomTat.Take(70).ToArray()) + " ...")
+                                        </p>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+    <!-- end tab content -->
+}

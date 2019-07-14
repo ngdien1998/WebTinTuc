@@ -1,114 +1,68 @@
 ﻿@model List<DanhMuc>
 
-<div class="nav__holder nav--sticky" style="width:100%;">
-    <div class="container relative">
-        <div class="flex-parent">
-            <!-- Side Menu Button -->
-            <button aria-label="Open side menu" class="nav-icon-toggle" id="nav-icon-toggle">
-                <span class="nav-icon-toggle__box">
-                    <span class="nav-icon-toggle__inner"></span>
-                </span>
-            </button>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="nav__holder nav--sticky" style="width:100%;">
+        <div class="container relative">
+            <div class="flex-parent">
+                <!-- Side Menu Button -->
+                <button aria-label="Open side menu" class="nav-icon-toggle" id="nav-icon-toggle">
+                    <span class="nav-icon-toggle__box">
+                        <span class="nav-icon-toggle__inner"></span>
+                    </span>
+                </button>
 
-            <a asp-action="Index" asp-controller="Home" class="logo">
-                <h3 style="margin:0;">DTP NEWS</h3>
-            </a>
+                <a asp-action="Index" asp-controller="Home" class="logo">
+                    <h3 style="margin:0;">DTP NEWS</h3>
+                </a>
 
-            <!-- Nav-wrap -->
-            <nav class="flex-child nav__wrap d-none d-lg-block">
-                <ul class="nav__menu">
-                    <li class="nav__dropdown active">
-                        @{
-                            var baiBao = Model[0].BaiBao
-                                .OrderByDescending(e => e.IdBaiBao)
-                                .Take(4)
-                                .ToArray();
-                        }
-                        <a asp-action="Index"
-                           asp-controller="Category"
-                           asp-route-id="@Model[0].IdDanhMuc"
-                           asp-route-name="@Model[0].TenDanhMuc.ToUrlFriendly()">
-                            @Model[0].TenDanhMuc
-                        </a>
-                        <ul class="nav__dropdown-menu nav__megamenu" style="width:1050px;left:-50%;">
-                            <li>
-                                <div class="nav__megamenu-wrap">
-                                    <div class="row">
-                                        @foreach (var bb in baiBao)
-                                        {
-                                            <div class="col nav__megamenu-item">
-                                                <article class="entry">
-                                                    <div class="entry__img-holder">
-                                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">
-                                                            <img alt="" class="entry__img" src="@bb.HinhAnh" style="height:178px;">
-                                                        </a>
-                                                        <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
-                                                           asp-action="Index"
-                                                           asp-controller="Category"
-                                                           asp-route-id="@bb.IdDanhMuc"
-                                                           asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
-                                                            @Model[0].TenDanhMuc
-                                                        </a>
-                                                    </div>
-
-                                                    <div class="entry__body">
-                                                        <h2 class="entry__title">
-                                                            <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">@bb.TieuDe</a>
-                                                        </h2>
-                                                    </div>
-                                                </article>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        <!-- end megamenu -->
-                    </li>
-
-                    @for (int i = 1; i < 8; i++)
-                    {
-                        <li class="nav__dropdown">
+                <!-- Nav-wrap -->
+                <nav class="flex-child nav__wrap d-none d-lg-block">
+                    <ul class="nav__menu">
+                        <li class="nav__dropdown active">
                             @{
-                                baiBao = Model[i].BaiBao
+                                var baiBao = Model[0].BaiBao
                                     .OrderByDescending(e => e.IdBaiBao)
                                     .Take(4)
                                     .ToArray();
                             }
                             <a asp-action="Index"
                                asp-controller="Category"
-                               asp-route-id="@Model[i].IdDanhMuc"
-                               asp-route-name="@Model[i].TenDanhMuc.ToUrlFriendly()">
-                                @Model[i].TenDanhMuc
+                               asp-route-id="@Model[0].IdDanhMuc"
+                               asp-route-name="@Model[0].TenDanhMuc.ToUrlFriendly()">
+                                @Model[0].TenDanhMuc
                             </a>
                             <ul class="nav__dropdown-menu nav__megamenu" style="width:1050px;left:-50%;">
                                 <li>
                                     <div class="nav__megamenu-wrap">
                                         <div class="row">
-                                            @foreach (var bb in baiBao)
+                                            @if (baiBao != null && baiBao.Length > 0)
                                             {
-                                                <div class="col nav__megamenu-item">
-                                                    <article class="entry">
-                                                        <div class="entry__img-holder">
-                                                            <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">
-                                                                <img alt="" class="entry__img" src="@bb.HinhAnh" style="height:178px;">
-                                                            </a>
-                                                            <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
-                                                               asp-action="Index"
-                                                               asp-controller="Category"
-                                                               asp-route-id="@bb.IdDanhMuc"
-                                                               asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
-                                                                @Model[i].TenDanhMuc
-                                                            </a>
-                                                        </div>
+                                                @foreach (var bb in baiBao)
+                                                {
+                                                    <div class="col nav__megamenu-item">
+                                                        <article class="entry">
+                                                            <div class="entry__img-holder">
+                                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">
+                                                                    <img alt="" class="entry__img" src="@bb.HinhAnh" style="height:178px;">
+                                                                </a>
+                                                                <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                                                                   asp-action="Index"
+                                                                   asp-controller="Category"
+                                                                   asp-route-id="@bb.IdDanhMuc"
+                                                                   asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                                                                    @Model[0].TenDanhMuc
+                                                                </a>
+                                                            </div>
 
-                                                        <div class="entry__body">
-                                                            <h2 class="entry__title">
-                                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">@bb.TieuDe</a>
-                                                            </h2>
-                                                        </div>
-                                                    </article>
-                                                </div>
+                                                            <div class="entry__body">
+                                                                <h2 class="entry__title">
+                                                                    <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">@bb.TieuDe</a>
+                                                                </h2>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                }
                                             }
                                         </div>
                                     </div>
@@ -116,31 +70,83 @@
                             </ul>
                             <!-- end megamenu -->
                         </li>
-                    }
-                </ul>
-                <!-- end menu -->
-            </nav>
-            <!-- end nav-wrap -->
-            <!-- Nav Right -->
-            <div class="nav__right">
-                <!-- Search -->
-                <div class="nav__right-item nav__search">
-                    <a class="nav__search-trigger" href="#" id="nav__search-trigger">
-                        <i class="ui-search nav__search-trigger-icon"></i>
-                    </a>
-                    <div class="nav__search-box" id="nav__search-box">
-                        <form class="nav__search-form">
-                            <input class="nav__search-input" placeholder="Search an article" type="text">
-                            <button class="search-button btn btn-lg btn-color btn-button" type="submit">
-                                <i class="ui-search nav__search-icon"></i>
-                            </button>
-                        </form>
+
+                        @for (int i = 1; i < 8; i++)
+                        {
+                            <li class="nav__dropdown">
+                                @{
+                                    baiBao = Model[i].BaiBao
+                                        .OrderByDescending(e => e.IdBaiBao)
+                                        .Take(4)
+                                        .ToArray();
+                                }
+                                <a asp-action="Index"
+                                   asp-controller="Category"
+                                   asp-route-id="@Model[i].IdDanhMuc"
+                                   asp-route-name="@Model[i].TenDanhMuc.ToUrlFriendly()">
+                                    @Model[i].TenDanhMuc
+                                </a>
+                                <ul class="nav__dropdown-menu nav__megamenu" style="width:1050px;left:-50%;">
+                                    <li>
+                                        <div class="nav__megamenu-wrap">
+                                            <div class="row">
+                                                @foreach (var bb in baiBao)
+                                                {
+                                                    <div class="col nav__megamenu-item">
+                                                        <article class="entry">
+                                                            <div class="entry__img-holder">
+                                                                <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">
+                                                                    <img alt="" class="entry__img" src="@bb.HinhAnh" style="height:178px;">
+                                                                </a>
+                                                                <a class="entry__meta-category entry__meta-category--label entry__meta-category--align-in-corner entry__meta-category--violet"
+                                                                   asp-action="Index"
+                                                                   asp-controller="Category"
+                                                                   asp-route-id="@bb.IdDanhMuc"
+                                                                   asp-route-name="@bb.IdDanhMucNavigation.TenDanhMuc.ToUrlFriendly()">
+                                                                    @Model[i].TenDanhMuc
+                                                                </a>
+                                                            </div>
+
+                                                            <div class="entry__body">
+                                                                <h2 class="entry__title">
+                                                                    <a asp-action="Index" asp-controller="Post" asp-route-id="@bb.IdBaiBao" asp-route-name="@bb.TieuDe.ToUrlFriendly()">@bb.TieuDe</a>
+                                                                </h2>
+                                                            </div>
+                                                        </article>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- end megamenu -->
+                            </li>
+                        }
+                    </ul>
+                    <!-- end menu -->
+                </nav>
+                <!-- end nav-wrap -->
+                <!-- Nav Right -->
+                <div class="nav__right">
+                    <!-- Search -->
+                    <div class="nav__right-item nav__search">
+                        <a class="nav__search-trigger" href="#" id="nav__search-trigger">
+                            <i class="ui-search nav__search-trigger-icon"></i>
+                        </a>
+                        <div class="nav__search-box" id="nav__search-box">
+                            <form class="nav__search-form">
+                                <input class="nav__search-input" placeholder="Search an article" type="text">
+                                <button class="search-button btn btn-lg btn-color btn-button" type="submit">
+                                    <i class="ui-search nav__search-icon"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+                <!-- end nav right -->
             </div>
-            <!-- end nav right -->
+            <!-- end flex-parent -->
         </div>
-        <!-- end flex-parent -->
+        <!-- end container -->
     </div>
-    <!-- end container -->
-</div>
+}

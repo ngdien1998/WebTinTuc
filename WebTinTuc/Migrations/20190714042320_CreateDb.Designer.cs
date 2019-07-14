@@ -9,7 +9,7 @@ using WebTinTuc.Models.Entities;
 namespace WebTinTuc.Migrations
 {
     [DbContext(typeof(TinTucContext))]
-    [Migration("20190426080928_CreateDb")]
+    [Migration("20190714042320_CreateDb")]
     partial class CreateDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

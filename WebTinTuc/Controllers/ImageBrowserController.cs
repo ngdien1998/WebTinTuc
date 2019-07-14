@@ -12,19 +12,12 @@ namespace WebTinTuc.Controllers
         private const string folderName = "images/";
         private static readonly string[] foldersToCopy = new[] { "shared/images/employees" };
 
-        /// <summary>
-        /// Gets the base paths from which content will be served.
-        /// </summary>
-        public override string ContentPath
-        {
-            get
-            {
-                return CreateUserFolder();
-            }
-        }
+		/// <summary>
+		/// Gets the base paths from which content will be served.
+		/// </summary>
+		public override string ContentPath => CreateUserFolder();
 
-        public ImageBrowserController(IHostingEnvironment hostingEnvironment)
-            : base(hostingEnvironment)
+		public ImageBrowserController(IHostingEnvironment hostingEnvironment) : base(hostingEnvironment)
         {
         }
 
